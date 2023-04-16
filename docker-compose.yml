@@ -18,8 +18,8 @@ services:
       dockerfile: Dockerfile.dev
     command: npm start
     volumes: 
-      - '.:/app'
-      - '/app/node_modules'
+      - "./frontend:/app"
+      - "/app/node_modules"
     ports: 
       - 3000:3000
     environment:
