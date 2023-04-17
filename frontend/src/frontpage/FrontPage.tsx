@@ -1,10 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { useRouteError } from "react-router-dom";
 
 export const FrontPage:FunctionComponent = () => {
   return (
     <div className="container">
-        <p>Hello ppl</p>
+      <h1 className="text-3xl font-bold underline text-center">Hello world!</h1> 
     </div>
   );
 }

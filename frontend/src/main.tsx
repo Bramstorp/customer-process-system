@@ -4,9 +4,11 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import './index.css'
+
 import { ErrorPage } from './shared/ErrorPage'
 import { FrontPage } from './frontpage/FrontPage'
+
+import './index.css'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <FrontPage  />
   </React.StrictMode>,
 )
