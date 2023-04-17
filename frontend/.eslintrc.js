@@ -262,13 +262,6 @@ module.exports = {
       },
     },
     {
-      // The IU frontend is scheduled for a rewrite, so we don't wanna mess with the deps at the current moment
-      files: ["src/iu/**"],
-      rules: {
-        "react-hooks/exhaustive-deps": 0,
-      },
-    },
-    {
       // Config files
       files: ["**/tasks/**", "postinstall.js"],
       env: {
