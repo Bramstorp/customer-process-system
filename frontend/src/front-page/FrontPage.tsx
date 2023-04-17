@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 
 export const FrontPage: FunctionComponent = () => {
   return (
@@ -9,13 +10,13 @@ export const FrontPage: FunctionComponent = () => {
           href="#"
           className="bg-gray-300 hover:bg-sky-700 text-white font-bold rounded-lg border shadow-lg m-2 p-10"
         >
-          <p>Retur vare</p>
+          <Link to="return">Retur vare</Link>
         </a>
         <a
           href="#"
           className="bg-gray-300 hover:bg-sky-700 text-white font-bold rounded-lg border shadow-lg m-2 p-10"
         >
-          <p>Click and Collect</p>
+          <Link to="click-and-collect">Click and Collect</Link>
         </a>
       </div>
     </div>

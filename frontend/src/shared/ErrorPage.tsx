@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 
 export const ErrorPage: FunctionComponent = () => {
   const error = useRouteError();
@@ -11,7 +11,7 @@ export const ErrorPage: FunctionComponent = () => {
       <button className="mt-5">
         <a className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring">
           <span className="relative block px-8 py-3 border border-current">
-            <router-link to="/">Go Home</router-link>
+            <Link to="/">Go Home</Link>
           </span>
         </a>
       </button>

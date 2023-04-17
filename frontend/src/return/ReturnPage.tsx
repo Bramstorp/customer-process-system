@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { useRouteError } from "react-router-dom";
 
-export const FrontPage:FunctionComponent = () => {
+export const ReturnPage: FunctionComponent = () => {
   return (
     <div>
-        <p>Hello</p>
+      <p>Return</p>
     </div>
   );
-}
+};
