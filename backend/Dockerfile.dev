@@ -1,7 +1,10 @@
 FROM python:3.9
 
-RUN pip3 install fastapi uvicorn SQLAlchemy databases aiosqlite
-
+ 
 WORKDIR /usr/src/app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . .
