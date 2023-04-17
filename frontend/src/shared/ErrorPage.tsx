@@ -1,16 +1,20 @@
 import React, { FunctionComponent } from "react";
 import { useRouteError } from "react-router-dom";
 
-export const ErrorPage:FunctionComponent = () => {
+export const ErrorPage: FunctionComponent = () => {
   const error = useRouteError();
 
   return (
-    <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
-    </div>
+    <main className="h-screen w-full flex flex-col justify-center items-center">
+      <h1 className="text-9xl font-extrabold tracking-widest">404</h1>
+
+      <button className="mt-5">
+        <a className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring">
+          <span className="relative block px-8 py-3 border border-current">
+            <router-link to="/">Go Home</router-link>
+          </span>
+        </a>
+      </button>
+    </main>
   );
-}
+};
