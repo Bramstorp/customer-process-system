@@ -6,8 +6,10 @@ from geoalchemy2.types import Geometry
 from typing import Any
 
 
-class Orders(SQLModel, table=True):
+class ClickAndCollects(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+    order_id: int = Field(default=None, foreign_key="orders.id")
     customer_id: int = Field(default=None, foreign_key="customers.id")
+    pickup_date: datetime
     orderstate: str
-    ordertype: str
+    time_to_pickup: int
