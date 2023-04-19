@@ -5,7 +5,6 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from passlib.context import CryptContext
 import jwt
 from starlette import status
-from sqlmodel import Session, select
 
 from app.db.database import engine
 from app.models.user import User
