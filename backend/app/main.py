@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .db.database import create_db_and_tables
 
 from .routes.user import user_router
+from .routes.configuration import configuration_router
 
 app = FastAPI()
 app.add_middleware(
@@ -15,6 +16,7 @@ app.add_middleware(
 )
 
 app.include_router(user_router)
+app.include_router(configuration_router)
 
 @app.on_event("startup")
 def on_startup():

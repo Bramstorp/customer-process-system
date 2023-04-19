@@ -1,11 +1,11 @@
-from fastapi import APIRouter, HTTPException, Security, security, Depends
+from fastapi import APIRouter, HTTPException, Depends
 from starlette.responses import JSONResponse
 from starlette.status import HTTP_201_CREATED
 
 from app.auth.auth import AuthHandler
 from app.db.database import session
 from app.models.user import UserInput, User, UserLogin
-from app.crud.user import select_all_users, find_user
+from app.utils.user import select_all_users, find_user
 
 user_router = APIRouter()
 auth_handler = AuthHandler()
@@ -22,7 +22,7 @@ def signup(user: UserInput):
     session.add(created_user)
     session.commit()
     
-    return JSONResponse(status_code=HTTP_201_CREATED)
+    return JSONResponse(content="user created", status_code=HTTP_201_CREATED)
 
 
 @user_router.post('/login', tags=['users'])
