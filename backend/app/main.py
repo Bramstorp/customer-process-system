@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlmodel import Session
 
-from .database import engine, create_db_and_tables
-from .order.model import Orders
+from .db.database import create_db_and_tables
+
+from .routes.user import user_router
 
 app = FastAPI()
 app.add_middleware(
@@ -14,25 +14,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(user_router)
 
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
-
-@app.post("/add-order/")
-async def add_order(order: Orders):
-    with Session(engine) as session:
-        session.add(order)
-        session.commit()
-        session.refresh(order)
-        
-        return order
-    
-@app.get("/get-orders")
-async def get_order():
-    with Session(engine) as session:
-        return session.query(Orders).all()
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
