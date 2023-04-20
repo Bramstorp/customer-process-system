@@ -4,7 +4,7 @@ from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED, HTTP_204
 from fastapi.encoders import jsonable_encoder
 
 from app.db.database import session
-from app.models.configuration import Configuration
+from app.models.configuration import Configuration, ConfigurationUpdate
 
 from app.routes.user import auth_handler
 
@@ -33,17 +33,12 @@ def get_company(id: int):
     return compnay_found
 
 @configuration_router.put('/company/{id}', response_model=Configuration, tags=['company'])
-def update_company(id: int, configuration: Configuration, user=Depends(auth_handler.get_current_user)):
+def update_company(id: int, configuration: ConfigurationUpdate, user=Depends(auth_handler.get_current_user)):
     company_found = session.get(Configuration, id)
     if company_found.company_user_id != user.id:
         return JSONResponse(content="U dont have permision to update this company", status_code=HTTP_401_UNAUTHORIZED)
     
-    update_item_encoded = jsonable_encoder(configuration)
-    update_item_encoded.pop('id', None)
-    update_item_encoded.pop('company_user_id', None)
-    for key, val in update_item_encoded.items():
-        company_found.__setattr__(key, val)
-        
+    session.add(**company_found.dict())    
     session.commit()
     return company_found
 
