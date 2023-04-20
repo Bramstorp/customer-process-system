@@ -6,7 +6,7 @@ from fastapi.encoders import jsonable_encoder
 from app.db.database import session
 from app.models.configuration import Configuration, ConfigurationUpdate, ConfigurationRead, ConfigurationCreate, ConfigurationReadWithUser
 
-from app.routes.user import auth_handler
+from app.endpoints.user import auth_handler
 
 configuration_router = APIRouter()
 

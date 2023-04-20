@@ -5,7 +5,7 @@ from fastapi.encoders import jsonable_encoder
 
 from app.db.database import session
 from app.models.rerturn_case import Returns
-from app.models.orders import Order, GetOrder
+from app.models.orders import Orders, GetOrder
 
 from app.utils.orders import get_order_by_orderid, get_order_by_customerid
 
