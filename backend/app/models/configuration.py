@@ -10,4 +10,4 @@ class Configuration(SQLModel, table=True):
     company_name: str
     company_user_id: Optional[int] = Field(default=None, foreign_key='user.id')
     company_user: Optional[User] = Relationship()
-
+    api_endpoints: str
