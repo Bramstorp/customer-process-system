@@ -1,13 +1,12 @@
 from typing import Optional
-from sqlmodel import Field, SQLModel
-from datetime import datetime
-from sqlalchemy import Column
-from geoalchemy2.types import Geometry
-from typing import Any
+from sqlmodel import Field, SQLModel, Relationship
+
+from app.models.customer import Customers
 
 
 class Orders(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    customer_id: int = Field(default=None, foreign_key="customers.id")
+    customer_id: Optional[Customers] = Field(default=None, foreign_key='customers.id')
+    customer: Optional[Customers] = Relationship()
     orderstate: str
     ordertype: str
