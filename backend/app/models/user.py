@@ -5,12 +5,13 @@ from pydantic import validator, EmailStr
 from sqlmodel import SQLModel, Field
 
 
-class User(SQLModel, table=True):
-    id: Optional[int] = Field(primary_key=True)
+class UsersBase(SQLModel):
     username: str = Field(index=True)
     password: str = Field(max_length=256, min_length=6)
     created_at: datetime.datetime = datetime.datetime.now()
 
+class Users(UsersBase, table=True):
+    id: Optional[int] = Field(primary_key=True)
 
 class UserInput(SQLModel):
     username: str
@@ -23,7 +24,11 @@ class UserInput(SQLModel):
             raise ValueError('passwords don\'t match')
         return v
 
-
 class UserLogin(SQLModel):
     username: str
     password: str
+    
+class UserRead(SQLModel):
+    id: int
+    username: str
+    created_at: datetime.datetime

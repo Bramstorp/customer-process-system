@@ -4,7 +4,7 @@ from starlette.status import HTTP_201_CREATED
 
 from app.auth.auth import AuthHandler
 from app.db.database import session
-from app.models.user import UserInput, User, UserLogin
+from app.models.user import UserInput, Users, UserLogin
 from app.utils.user import select_all_users, find_user
 
 user_router = APIRouter()
@@ -18,7 +18,7 @@ def signup(user: UserInput):
         raise HTTPException(status_code=400, detail='Username is taken')
     
     hashed_pwd = auth_handler.get_password_hash(user.password)
-    created_user = User(username=user.username, password=hashed_pwd)
+    created_user = Users(username=user.username, password=hashed_pwd)
     session.add(created_user)
     session.commit()
     
@@ -41,5 +41,5 @@ def login(user: UserLogin):
 
 
 @user_router.get('/users/me', tags=['users'])
-def get_current_user(user: User = Depends(auth_handler.get_current_user)):
+def get_current_user(user: Users = Depends(auth_handler.get_current_user)):
     return user

@@ -17,7 +17,18 @@ class Order(OrderBase, table=True):
 class OrderCreate(OrderBase):
     pass
 
-class Orderline(SQLModel, table=True):
+class OrderRead(OrderBase):
+    pass
+
+
+class OrderlineBase(SQLModel):
+    productnumber: str
+    productname: str
+    amount: int
+    unitprice: float
+    totalprice: float
+
+class Orderline(OrderlineBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     order: List[Order] = Relationship(back_populates="orderline", sa_relationship=RelationshipProperty("Order", primaryjoin="foreign(Order.orderline_id) == Order.id", uselist=False))
     productnumber: str
@@ -25,6 +36,10 @@ class Orderline(SQLModel, table=True):
     amount: int
     unitprice: float
     totalprice: float
+
+class OrderlineCreate(OrderlineBase):
+    pass
+    
 
 class GetOrder(SQLModel):
     order_id: int
