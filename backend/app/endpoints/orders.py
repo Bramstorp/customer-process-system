@@ -33,7 +33,6 @@ def get_order(order_id: int):
 
 @order_routes.get('/orders',  tags=['orders'], status_code=201, description='Get all orders')
 def get_orders():
-    statement = select(Orders)
-    orders = session.exec(statement).all()    
+    orders = session.exec(select(Orders)).all()    
     return {'orders': orders}
 
