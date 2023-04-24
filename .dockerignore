@@ -11,6 +11,7 @@ htmlcov
 .idea
 *.mo
 node_modules
+node_modules/
 log
 __pycache__
 

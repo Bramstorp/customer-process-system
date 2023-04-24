@@ -2,9 +2,16 @@ FROM node:16.20.0-alpine3.16
 
 WORKDIR /app
 
-COPY package.json .
-COPY package-lock.json .
+ENV PATH /app/node_modules/.bin:$PATH
 
-RUN npm install
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-COPY . .
+ENTRYPOINT ["/entrypoint.sh"]
+
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install --silent
+
+COPY . ./
