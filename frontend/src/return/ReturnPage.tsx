@@ -27,7 +27,11 @@ export const ReturnPage: FunctionComponent = () => {
       <h1 className="text-3xl mt-10 mb-10">
         Indsats order-nummer og tryk ENTER
       </h1>
-      <Numpad label={"Order-nummer"} func={x} />
+      <Numpad
+        placeholder={"Indsæt ordrenummer"}
+        label={"Order-nummer"}
+        func={x}
+      />
     </div>
   );
 };

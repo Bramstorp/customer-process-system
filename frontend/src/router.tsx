@@ -6,6 +6,7 @@ import { ClickAndCollectPage } from "./click-and-collect/ClickAndCollectPage";
 import { ReturnPage } from "./return/ReturnPage";
 import { ConfigurationPage } from "./configuration/ConfigurationPage";
 import { ReturnKolli } from "./return/ReturnKolli";
+import { ReturnConfirmed } from "./return/ReturnConfirmed";
 
 export default function Router() {
   return (
@@ -14,6 +15,7 @@ export default function Router() {
       <Route path="/click-and-collect" element={<ClickAndCollectPage />} />
       <Route path="/return" element={<ReturnPage />} />
       <Route path="/return/kolli" element={<ReturnKolli />} />
+      <Route path="/return/confirm" element={<ReturnConfirmed />} />
       <Route path="/config" element={<ConfigurationPage />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

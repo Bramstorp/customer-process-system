@@ -14,7 +14,7 @@ const CustomLayout = (props: PropsWithChildren) => {
       </div>
       {window.history.state && window.history.state.idx > 0 ? (
         <button
-          className="bg-red-500 ml-5 items-center flex hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-red-500 m-5 items-center absolute left-0 bottom-0 flex hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => navigate(-1)}
         >
           <FiArrowLeft />

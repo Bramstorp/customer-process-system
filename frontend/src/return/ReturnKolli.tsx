@@ -28,14 +28,22 @@ export const ReturnKolli: FunctionComponent = () => {
     });
 
     if (fetchOrder) {
-      navigate("/return/confirm", { state: fetchOrder });
+      navigate("/return/confirm", {
+        state: { orderid: location.state.orderid },
+      });
     }
   };
 
   return (
     <div className="pt-4 flex flex-col items-center justify-center">
       <h1 className="text-3xl mt-10 mb-10">Vælg kolli antal</h1>
-      <Numpad label={"Kolli antal"} func={x} />
+      <p>Ordrenummer: {location.state.orderid}</p>
+      <p>Navn: {location.state.order.customer.name}</p>
+      <Numpad
+        label={"Kolli antal"}
+        placeholder={"indsæt kolliantal"}
+        func={x}
+      />
     </div>
   );
 };

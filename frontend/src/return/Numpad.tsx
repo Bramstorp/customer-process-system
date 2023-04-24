@@ -9,11 +9,15 @@ const btnLayout = [
 
 interface Props {
   func: (id: string) => void;
-  text?: string;
+  placeholder?: string;
   label?: string;
 }
 
-export const Numpad: FunctionComponent<Props> = ({ func, text, label }) => {
+export const Numpad: FunctionComponent<Props> = ({
+  func,
+  placeholder,
+  label,
+}) => {
   let [number, setNumber] = useState({
     num: "",
   });
@@ -36,11 +40,10 @@ export const Numpad: FunctionComponent<Props> = ({ func, text, label }) => {
   };
 
   const enter = async () => {
-    if (number.num.length > 4) {
+    if (number.num.length < 4) {
       alert("Ordrenummeret skal være på 4 cifre");
       return;
     }
-
     func(number.num);
   };
 
@@ -54,7 +57,7 @@ export const Numpad: FunctionComponent<Props> = ({ func, text, label }) => {
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         value={number.num}
         required
-        placeholder="Indsæt ordrenummer"
+        placeholder={placeholder}
       />
       <div className="grid grid-cols-4 text-black text-md text-center font-bold leading-6 pt-4 gap-2">
         {btnLayout.flat().map((btn, i) => {
