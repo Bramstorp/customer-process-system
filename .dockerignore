@@ -12,6 +12,7 @@ htmlcov
 *.mo
 node_modules
 node_modules/
+/node_modules
 log
 __pycache__
 
@@ -30,4 +31,3 @@ frontend/dist
 frontend/webpack-stats
 frontend/eslint.xml
 frontend/coverage
-lib/bvvs/storefront/static/bundle
