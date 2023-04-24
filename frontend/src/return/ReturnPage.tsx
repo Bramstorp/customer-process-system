@@ -3,11 +3,9 @@ import { useRouteError } from "react-router-dom";
 
 export const ReturnPage: FunctionComponent = () => {
   return (
-    <div className="h-screen w-full flex flex-col justify-center items-center">
-      <h1 className="text-7xl  ">SELVBETJENING</h1>
-      <div className="flex items-center justify-center">
-        <p>test</p>
-      </div>
+    <div className="flex flex-col justify-center items-center">
+      <h1 className="text-3xl mt-10 mb-10">Vælg ønsket funktion</h1>
+      <p>test</p>
     </div>
   );
 };

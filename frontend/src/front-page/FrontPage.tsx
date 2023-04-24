@@ -5,8 +5,8 @@ import { FiShoppingCart } from "react-icons/fi";
 
 export const FrontPage: FunctionComponent = () => {
   return (
-    <div className="h-screen w-full flex flex-col justify-center items-center">
-      <h1 className="text-7xl mb-20">SELVBETJENING</h1>
+    <div className="flex flex-col justify-center items-center">
+      <h1 className="text-3xl mt-10 mb-10">Vælg ønsket funktion</h1>
       <div className="flex items-center justify-center">
         <Link
           to="return"

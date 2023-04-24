@@ -26,6 +26,10 @@ app.include_router(order_routes)
 app.include_router(customer_routes)
 app.include_router(cnc_routes)
 
+@app.get("/health")
+async def is_alive():
+    return "ok"
+
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
