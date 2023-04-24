@@ -17,13 +17,13 @@ export const ReturnKolli: FunctionComponent = () => {
           kolli_amount: kolli,
         }),
       }
-    ).then((res) => {
+    ).then(async (res) => {
       if (res.status === 404) {
         alert("Ordrenummeret findes ikke");
       } else if (res.status === 401) {
-        alert("Der fidner allerede en returnering på denne ordre");
+        alert(await res.json());
       } else {
-        return res.json();
+        return await res.json();
       }
     });
 

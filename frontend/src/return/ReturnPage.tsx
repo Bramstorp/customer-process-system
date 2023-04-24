@@ -9,11 +9,11 @@ export const ReturnPage: FunctionComponent = () => {
     const fetchOrder = await fetch(`http://localhost:8000/order/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-    }).then((res) => {
+    }).then(async (res) => {
       if (res.status === 404) {
-        alert("Ordrenummeret findes ikke");
+        alert(await res.json());
       } else {
-        return res.json();
+        return await res.json();
       }
     });
 
