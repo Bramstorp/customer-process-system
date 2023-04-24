@@ -32,16 +32,17 @@ export const Numpad: FunctionComponent<Props> = ({
     });
   };
 
-  const removeLast = () => {
+  const removeLastClick = () => {
     setNumber({
       ...number,
       num: number.num.slice(0, -1),
     });
   };
 
-  const enter = async () => {
-    if (number.num.length < 4) {
-      alert("Ordrenummeret skal være på 4 cifre");
+  const enterClick = async () => {
+    console.log(number.num.length);
+    if (number.num.length == 0) {
+      alert("Værdi mangler");
       return;
     }
     func(number.num);
@@ -68,7 +69,11 @@ export const Numpad: FunctionComponent<Props> = ({
               }`}
               key={i}
               onClick={
-                btn === "SLET" ? removeLast : btn === "ENTER" ? enter : numClick
+                btn === "SLET"
+                  ? removeLastClick
+                  : btn === "ENTER"
+                  ? enterClick
+                  : numClick
               }
             >
               {btn}
