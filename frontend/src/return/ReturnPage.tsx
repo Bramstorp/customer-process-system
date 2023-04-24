@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Numpad } from "./Numpad";
+import { Numpad } from "../shared/Numpad";
 
 export const ReturnPage: FunctionComponent = () => {
   const navigate = useNavigate();

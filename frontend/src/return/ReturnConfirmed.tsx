@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Numpad } from "./Numpad";
+import { Numpad } from "../shared/Numpad";
 
 export const ReturnConfirmed: FunctionComponent = () => {
   const location = useLocation();
@@ -13,7 +13,7 @@ export const ReturnConfirmed: FunctionComponent = () => {
           2. Placere dem i returområet. (Kasse/Palle)
         </li>
       </ol>
-      <p className="text-2xl">
+      <p className="text-2xl mt-8">
         Der er nu sendt en kvittering på din indlevering til din mail og inden
         for 24 timer vil vi behandle din retursag.
       </p>

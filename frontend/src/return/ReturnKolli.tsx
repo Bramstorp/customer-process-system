@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Numpad } from "./Numpad";
+import { Numpad } from "../shared/Numpad";
 
 export const ReturnKolli: FunctionComponent = () => {
   const navigate = useNavigate();
