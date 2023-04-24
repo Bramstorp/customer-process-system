@@ -19,7 +19,13 @@ def create_return_case(retrurn: ReturnCreate, customerid: int, orderid: int):
     customer = session.get(Customers, customerid)
     if not order or not customer:
         return JSONResponse(status_code=HTTP_404_NOT_FOUND, content='Order for customer not found')
+
     
+    statement = select(Returns).where(Returns.order_id == orderid)
+    existing_returncase = session.exec(statement).first()
+    if existing_returncase:
+        return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Return case already exists')
+
     db_return_case = Returns(**retrurn.dict(), customer_id=customerid, order_id=orderid)
     session.add(db_return_case)
     session.commit()

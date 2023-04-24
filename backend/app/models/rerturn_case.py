@@ -27,3 +27,4 @@ class ReturnRead(ReturnBase):
 class ReturnCaseWithRelationship(ReturnRead):
     customer: Optional[Customers] = None
     order: Optional[Orders] = None
+    

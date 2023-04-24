@@ -5,7 +5,7 @@ import { FiArrowLeft } from "react-icons/fi";
 
 const CustomLayout = (props: PropsWithChildren) => {
   let navigate = useNavigate();
-  console.log(window.history.state);
+
   return (
     <div>
       <Navbar />
