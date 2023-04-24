@@ -4,7 +4,9 @@ import { Navbar } from "../shared/Navbar";
 const CustomLayout = (props: PropsWithChildren) => (
   <div>
     <Navbar />
-    {props.children}
+    <div className="container max-w-screen-lg mx-auto px-8">
+      {props.children}
+    </div>
   </div>
 );
 
