@@ -54,8 +54,8 @@ export const ReturnPage: FunctionComponent = () => {
         <div className="grid grid-cols-4 text-black text-md text-center font-bold leading-6 pt-4 gap-2">
           {btnLayout.flat().map((btn, i) => {
             return (
-              <a
-                className={`bg-slate-100 p-10 rounded grid place-content-center ${
+              <button
+                className={`bg-slate-100 hover:bg-slate-200 p-10 rounded grid place-content-center ${
                   btn === "0"
                     ? "col-span-3"
                     : btn === "ENTER"
@@ -72,7 +72,7 @@ export const ReturnPage: FunctionComponent = () => {
                 }
               >
                 {btn}
-              </a>
+              </button>
             );
           })}
         </div>
