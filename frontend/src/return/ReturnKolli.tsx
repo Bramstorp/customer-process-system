@@ -7,7 +7,7 @@ export const ReturnKolli: FunctionComponent = () => {
   const location = useLocation();
 
   const x = async (kolli: string) => {
-    const postOrder = await fetch(`http://localhost:8000/create-return-case`, {
+    await fetch(`http://localhost:8000/create-return-case`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -17,20 +17,14 @@ export const ReturnKolli: FunctionComponent = () => {
         customer_id: location.state.order.customer.id,
       }),
     }).then(async (res) => {
-      if (res.status === 404) {
-        alert("Ordrenummeret findes ikke");
-      } else if (res.status === 401) {
+      if (res.status === 404 || res.status === 401) {
         alert(await res.json());
       } else {
-        return await res.json();
+        navigate("/return/confirm", {
+          state: { orderid: location.state.orderid },
+        });
       }
     });
-
-    if (postOrder) {
-      navigate("/return/confirm", {
-        state: { orderid: location.state.orderid },
-      });
-    }
   };
 
   return (

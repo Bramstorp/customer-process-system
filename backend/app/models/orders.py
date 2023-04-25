@@ -4,7 +4,7 @@ from sqlmodel import Field, SQLModel, Relationship
 from app.models.customer import Customers
 
 class OrderBase(SQLModel):
-    orderstate: str
+    orderstate: str = Field(default="ordered")
     ordertype: str
 
 class Orders(OrderBase, table=True):

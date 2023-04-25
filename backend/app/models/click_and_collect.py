@@ -15,6 +15,7 @@ class ClickAndCollects(ClickAndCollectBase, table=True):
     order: Optional[Orders] = Relationship()
     customer_id: Optional[int] = Field(default=None, foreign_key='customers.id')
     customer: Optional[Customers] = Relationship()
+    time_to_pickup: Optional[str] = Field(default="")
 
 class ClickAndCollectCreate(ClickAndCollectBase):
     order_id: int
