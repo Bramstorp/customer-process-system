@@ -6,7 +6,7 @@ from app.models.customer import Customers
 from app.models.orders import Orders
 
 class ClickAndCollectBase(SQLModel):
-    pickup_date: Optional[datetime] = Field(default="")
+    pickup_date: datetime.datetime = datetime.datetime.now()
     orderstate: Optional[str] = Field(default="")
 
 class ClickAndCollects(ClickAndCollectBase, table=True):

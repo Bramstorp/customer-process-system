@@ -6,6 +6,7 @@ from app.models.customer import Customers
 class OrderBase(SQLModel):
     orderstate: str = Field(default="ordered")
     ordertype: str
+    orderdata: str
 
 class Orders(OrderBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
