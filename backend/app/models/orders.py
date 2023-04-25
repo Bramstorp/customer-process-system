@@ -13,7 +13,7 @@ class Orders(OrderBase, table=True):
     customer: Optional[Customers] = Relationship()
     
 class OrderCreate(OrderBase):
-    pass
+    customer_id: int
 
 class OrderRead(OrderBase):
     pass

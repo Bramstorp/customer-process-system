@@ -12,12 +12,12 @@ from app.models.orders import Orders, OrderCreate, OrderRead, OrderReadWithCusto
 order_routes = APIRouter()
 
 @order_routes.post('/create-orders', tags=['orders'], status_code=201, description='Create new orders')
-def create_order(order: OrderCreate, customer_id: int):        
-    customer = session.get(Customers, customer_id)
+def create_order(order: OrderCreate):  
+    customer = session.get(Customers, order.customer_id)
     if not customer:
         return JSONResponse(status_code=HTTP_404_NOT_FOUND, content='Customer not found')
-    
-    db_order = Orders(**order.dict(), customer_id=customer_id)
+
+    db_order = Orders(**order.dict(), customer=customer)
     session.add(db_order)
     session.commit()
     session.refresh(db_order)

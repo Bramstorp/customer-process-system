@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from "react";
-import { useRouteError } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
 
 export const ClickAndCollectPage: FunctionComponent = () => {
+  const navigate = useNavigate();
+
   const x = async (id: string) => {
     const fetchOrder = await fetch(`http://localhost:8000/order/${id}`, {
       method: "GET",
@@ -16,7 +18,9 @@ export const ClickAndCollectPage: FunctionComponent = () => {
     });
 
     if (fetchOrder) {
-      navigate("/return/kolli", { state: { order: fetchOrder, orderid: id } });
+      navigate("/click-and-collect/confirmed", {
+        state: { order: fetchOrder, orderid: id },
+      });
     }
   };
   return (

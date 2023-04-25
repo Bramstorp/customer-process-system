@@ -17,7 +17,8 @@ class ClickAndCollects(ClickAndCollectBase, table=True):
     customer: Optional[Customers] = Relationship()
 
 class ClickAndCollectCreate(ClickAndCollectBase):
-    pass
+    order_id: int
+    customer_id: int
 
 class ClickAndCollectRead(ClickAndCollectBase):
     pass

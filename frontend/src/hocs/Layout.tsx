@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { Navbar } from "../shared/Navbar";
+import { Navbar } from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 

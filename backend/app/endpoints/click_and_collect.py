@@ -12,13 +12,13 @@ from app.models.orders import Orders
 cnc_routes = APIRouter()
 
 @cnc_routes.post('/create-click-and-collect', tags=['click and collect'], status_code=201, description='Create new click and collect orders')
-def create_cnc_order(cnc_order: ClickAndCollectCreate, customer_id: int, order_id: int):        
-    customer = session.get(ClickAndCollects, customer_id)
-    order = session.get(Orders, order_id)
+def create_cnc_order(cnc_order: ClickAndCollectCreate):        
+    customer = session.get(ClickAndCollects, cnc_order.customer_id)
+    order = session.get(Orders, cnc_order.order_id)
     if not customer or not order:
         return JSONResponse(status_code=HTTP_404_NOT_FOUND, content='No order found for this customer')
     
-    db_cnc_order = ClickAndCollects(**cnc_order.dict(), customer_id=customer_id, order_id=order_id)
+    db_cnc_order = ClickAndCollects(**cnc_order.dict())
     session.add(db_cnc_order)
     session.commit()
     session.refresh(db_cnc_order)

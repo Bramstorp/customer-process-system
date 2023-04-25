@@ -19,7 +19,8 @@ class Returns(ReturnBase, table=True):
 
 
 class ReturnCreate(ReturnBase):
-    pass
+    order_id: int
+    customer_id: int
 
 class ReturnRead(ReturnBase):
     pass

@@ -3,8 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
 
 export const ReturnConfirmed: FunctionComponent = () => {
-  const location = useLocation();
-
   return (
     <div className="pt-4 flex flex-col items-center justify-center">
       <ol type="1">

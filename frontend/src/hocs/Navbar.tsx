@@ -8,7 +8,6 @@ export const Navbar: FunctionComponent = () => {
         <img
           src="https://www.anmeld-haandvaerker.dk/sites/default/files/styles/sponsor_logo_large/public/sponsor_partner_logo/ao-logo-png_0.png?itok=GCxIO0SO"
           className="h-8 mr-3"
-          alt="Flowbite Logo"
         />
         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
           SELVBETJENING

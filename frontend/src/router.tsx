@@ -7,12 +7,17 @@ import { ReturnPage } from "./return/ReturnPage";
 import { ConfigurationPage } from "./configuration/ConfigurationPage";
 import { ReturnKolli } from "./return/ReturnKolli";
 import { ReturnConfirmed } from "./return/ReturnConfirmed";
+import { ClickAndCollectConfirmed } from "./click-and-collect/ClickAndCollectConfirmed";
 
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<FrontPage />} />
       <Route path="/click-and-collect" element={<ClickAndCollectPage />} />
+      <Route
+        path="/click-and-collect/confirmed"
+        element={<ClickAndCollectConfirmed />}
+      />
       <Route path="/return" element={<ReturnPage />} />
       <Route path="/return/kolli" element={<ReturnKolli />} />
       <Route path="/return/confirm" element={<ReturnConfirmed />} />
