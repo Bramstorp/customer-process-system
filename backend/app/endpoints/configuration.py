@@ -25,7 +25,10 @@ def create_company(config: ConfigurationCreate, user=Depends(auth_handler.get_cu
     return config
 
 @configuration_router.get('/company/{id}', response_model=ConfigurationReadWithUser, tags=['company'])
-def get_company(id: int):
+def get_company(id: int, user=Depends(auth_handler.get_current_user)):
+    if not user:
+        return JSONResponse(content="UNAUTHORIZED USER", status_code=HTTP_401_UNAUTHORIZED)
+    
     compnay = session.get(Configuration, id)
     if not compnay:
         return JSONResponse(content="Company not found", status_code=HTTP_404_NOT_FOUND)
@@ -33,7 +36,10 @@ def get_company(id: int):
     return compnay
 
 @configuration_router.put('/company/{id}', response_model=Configuration, tags=['company'])
-def update_company(id: int, configuration: ConfigurationUpdate, user=Depends(auth_handler.get_current_user)):
+def update_company(id: int, user=Depends(auth_handler.get_current_user)):
+    if not user:
+        return JSONResponse(content="UNAUTHORIZED USER", status_code=HTTP_401_UNAUTHORIZED)
+    
     company_found = session.get(Configuration, id)
     if company_found.company_user_id != user.id:
         return JSONResponse(content="U dont have permision to update this company", status_code=HTTP_401_UNAUTHORIZED)
@@ -44,6 +50,9 @@ def update_company(id: int, configuration: ConfigurationUpdate, user=Depends(aut
 
 @configuration_router.delete('/company/{id}', status_code=HTTP_204_NO_CONTENT, tags=['company'])
 def delete_company(id:int, user=Depends(auth_handler.get_current_user)):
+    if not user:
+        return JSONResponse(content="UNAUTHORIZED USER", status_code=HTTP_401_UNAUTHORIZED)
+    
     company_found = session.get(Configuration, id)
     if company_found.company_user_id != user.id:
         return JSONResponse(content="U dont have permision to update this company", status_code=HTTP_401_UNAUTHORIZED)
