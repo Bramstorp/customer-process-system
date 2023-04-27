@@ -24,7 +24,7 @@ export default function LoginPage() {
           }
         })
         .catch(function (error) {
-          alert("Wrong username or password");
+          alert(error.response.data);
           console.log(error, "error");
         });
     }

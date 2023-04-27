@@ -23,7 +23,7 @@ export const ReturnKolli: FunctionComponent = () => {
         }
       })
       .catch(function (error) {
-        alert(error);
+        alert(error.response.data);
         console.log(error, "error");
       });
   };

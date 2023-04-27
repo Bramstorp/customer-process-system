@@ -6,7 +6,7 @@ import axios from "axios";
 export const ClickAndCollectPage: FunctionComponent = () => {
   const navigate = useNavigate();
 
-  const createClickAndCollect = (customerid, orderid) => {
+  const createClickAndCollect = (customerid: string, orderid: string) => {
     axios
       .post("http://localhost:8000/create-click-and-collect", {
         pickup_date: "2023-04-24T14:26:31.655000",
@@ -22,7 +22,7 @@ export const ClickAndCollectPage: FunctionComponent = () => {
         }
       })
       .catch((error) => {
-        alert(error);
+        alert(error.response.data);
         console.log(error, "error");
       });
   };
@@ -34,7 +34,7 @@ export const ClickAndCollectPage: FunctionComponent = () => {
         createClickAndCollect(res.data.customer.id, id);
       })
       .catch((error) => {
-        alert(error);
+        alert(error.response.data);
         console.log(error, "error");
       });
   };

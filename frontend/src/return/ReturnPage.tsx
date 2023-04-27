@@ -12,7 +12,7 @@ export const ReturnPage: FunctionComponent = () => {
         navigate("/return/kolli", { state: res.data });
       })
       .catch((error) => {
-        alert(error);
+        alert(error.response.data.message);
         console.log(error, "error");
       });
   };

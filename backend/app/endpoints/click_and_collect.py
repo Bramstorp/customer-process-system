@@ -18,6 +18,11 @@ def create_cnc_order(cnc_order: ClickAndCollectCreate):
     if not order:
         return JSONResponse(status_code=HTTP_404_NOT_FOUND, content='No order found for this customer')
 
+    statement = select(ClickAndCollects).where(ClickAndCollects.order_id ==  cnc_order.order_id)
+    existing_cnc_order = session.exec(statement).first()
+    if existing_cnc_order:
+        return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Click and collect order already exists')
+
     if order.ordertype != 'click-and-collect':
         return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Order is not a click and collect order')
     
