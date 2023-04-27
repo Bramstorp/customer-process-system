@@ -5,8 +5,8 @@ import { Numpad } from "../shared/Numpad";
 export const ReturnPage: FunctionComponent = () => {
   const navigate = useNavigate();
 
-  const x = async (id: string) => {
-    const fetchOrder = await fetch(`http://localhost:8000/order/${id}`, {
+  const x = (id: string) => {
+    const fetchOrder = fetch(`http://localhost:8000/order/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     }).then(async (res) => {

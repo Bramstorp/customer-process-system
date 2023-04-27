@@ -6,13 +6,13 @@ from sqlmodel import select
 
 from app.db.database import session
 from app.models.click_and_collect import ClickAndCollects
-from app.models.click_and_collect import ClickAndCollectCreate, ClickAndCollectRead, ClickAndCollectReadWithRelationship
+from app.models.click_and_collect import ClickAndCollectCreate, ClickAndCollectReadWithRelationship
 from app.models.orders import Orders
 from app.models.rerturn_case import Returns
 
 cnc_routes = APIRouter()
 
-@cnc_routes.post('/create-click-and-collect', tags=['click and collect'], status_code=201, description='Create new click and collect orders')
+@cnc_routes.post('/create-click-and-collect', response_model=ClickAndCollectReadWithRelationship, tags=['click and collect'], status_code=201, description='Create new click and collect orders')
 def create_cnc_order(cnc_order: ClickAndCollectCreate):        
     order = session.get(Orders, cnc_order.order_id)
     if not order:

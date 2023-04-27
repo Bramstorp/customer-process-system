@@ -5,8 +5,8 @@ from fastapi.encoders import jsonable_encoder
 from sqlmodel import select
 
 from app.db.database import session
-from app.models.customer import CustomerInDB, Customers
-from app.models.orders import Orders, OrderCreate, OrderRead, OrderReadWithCustomer
+from app.models.customer import Customers
+from app.models.orders import Orders, OrderCreate, OrderReadWithCustomer
 
 
 order_routes = APIRouter()

@@ -21,6 +21,7 @@ class OrderRead(OrderBase):
 
 class OrderReadWithCustomer(OrderRead):
     customer: Optional[Customers] = None
+    id: Optional[int] = None
 
     
 class GetOrder(SQLModel):

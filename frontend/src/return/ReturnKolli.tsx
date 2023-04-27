@@ -1,30 +1,29 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
+import axios from "axios";
 
 export const ReturnKolli: FunctionComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const x = async (kolli: string) => {
-    await fetch(`http://localhost:8000/create-return-case`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+  const x = (kolli: string) => {
+    axios
+      .post(`http://localhost:8000/create-return-case`, {
         return_date: "2023-04-24T14:26:31.655000",
         kolli_amount: kolli,
         order_id: location.state.orderid,
         customer_id: location.state.order.customer.id,
-      }),
-    }).then(async (res) => {
-      if (res.status === 404 || res.status === 401) {
-        alert(await res.json());
-      } else {
+      })
+      .then((res) => {
         navigate("/return/confirm", {
           state: { orderid: location.state.orderid },
         });
-      }
-    });
+      })
+      .catch(function (error) {
+        alert(error);
+        console.log(error, "error");
+      });
   };
 
   return (
