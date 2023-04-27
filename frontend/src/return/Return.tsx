@@ -5,6 +5,7 @@ import axios from "axios";
 
 export const ReturnPage: FunctionComponent = () => {
   const navigate = useNavigate();
+
   const x = (id: number) => {
     axios
       .get(`http://localhost:8000/order/${id}`)

@@ -1,6 +1,4 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { Numpad } from "../shared/Numpad";
 
 export const ReturnConfirmed: FunctionComponent = () => {
   return (

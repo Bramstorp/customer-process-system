@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
 import axios from "axios";
 
-export const ClickAndCollectPage: FunctionComponent = () => {
+export const ClickAndCollect: FunctionComponent = () => {
   const navigate = useNavigate();
 
   const createClickAndCollect = (customerid: string, orderid: string) => {

@@ -1,9 +1,11 @@
+import React, { FunctionComponent } from "react";
+
 import { useNavigate } from "react-router";
-import { fetchToken, setToken } from "../auth/Auth";
+import { setToken } from "../auth/Auth";
 import { useState } from "react";
 import axios from "axios";
 
-export default function LoginPage() {
+export const Login: FunctionComponent = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +26,7 @@ export default function LoginPage() {
           }
         })
         .catch(function (error) {
-          alert(error.response.data);
+          alert(error.response.data.detail);
           console.log(error, "error");
         });
     }
@@ -72,4 +74,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
+};

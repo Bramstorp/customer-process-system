@@ -8,7 +8,7 @@ const btnLayout = [
 ];
 
 interface Props {
-  onClick: (id: string) => void;
+  onClick: (id?: string) => void;
   placeholder?: string;
   label?: string;
 }
