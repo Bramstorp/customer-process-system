@@ -8,6 +8,8 @@ import { ConfigurationPage } from "./configuration/ConfigurationPage";
 import { ReturnKolli } from "./return/ReturnKolli";
 import { ReturnConfirmed } from "./return/ReturnConfirmed";
 import { ClickAndCollectConfirmed } from "./click-and-collect/ClickAndCollectConfirmed";
+import { RequireToken } from "./auth/Auth";
+import LoginPage from "./account/LoginPage";
 
 export default function Router() {
   return (
@@ -21,7 +23,15 @@ export default function Router() {
       <Route path="/return" element={<ReturnPage />} />
       <Route path="/return/kolli" element={<ReturnKolli />} />
       <Route path="/return/confirm" element={<ReturnConfirmed />} />
-      <Route path="/config" element={<ConfigurationPage />} />
+      <Route path="/admin" element={<LoginPage />} />
+      <Route
+        path="/config"
+        element={
+          <RequireToken>
+            <ConfigurationPage />
+          </RequireToken>
+        }
+      />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

@@ -46,7 +46,7 @@ export const ClickAndCollectPage: FunctionComponent = () => {
       <Numpad
         placeholder={"Indsæt ordrenummer"}
         label={"Order-nummer"}
-        func={x}
+        onClick={x}
       />
     </div>
   );

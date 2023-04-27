@@ -35,7 +35,7 @@ export const ReturnKolli: FunctionComponent = () => {
       <Numpad
         label={"Kolli antal"}
         placeholder={"indsæt kolliantal"}
-        func={x}
+        onClick={x}
       />
     </div>
   );

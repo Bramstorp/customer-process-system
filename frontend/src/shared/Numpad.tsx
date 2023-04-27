@@ -8,13 +8,13 @@ const btnLayout = [
 ];
 
 interface Props {
-  func: (id: string) => void;
+  onClick: (id: string) => void;
   placeholder?: string;
   label?: string;
 }
 
 export const Numpad: FunctionComponent<Props> = ({
-  func,
+  onClick,
   placeholder,
   label,
 }) => {
@@ -40,12 +40,11 @@ export const Numpad: FunctionComponent<Props> = ({
   };
 
   const enterClick = async () => {
-    console.log(number.num.length);
     if (number.num.length == 0) {
       alert("Værdi mangler");
       return;
     }
-    func(number.num);
+    onClick(number.num);
   };
 
   return (
