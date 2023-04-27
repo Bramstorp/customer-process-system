@@ -1,25 +1,20 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
+import axios from "axios";
 
 export const ReturnPage: FunctionComponent = () => {
   const navigate = useNavigate();
-
-  const x = (id: string) => {
-    const fetchOrder = fetch(`http://localhost:8000/order/${id}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }).then(async (res) => {
-      if (res.status === 404) {
-        alert(await res.json());
-      } else {
-        return await res.json();
-      }
-    });
-
-    if (fetchOrder) {
-      navigate("/return/kolli", { state: { order: fetchOrder, orderid: id } });
-    }
+  const x = (id: number) => {
+    axios
+      .get(`http://localhost:8000/order/${id}`)
+      .then((res) => {
+        navigate("/return/kolli", { state: res.data });
+      })
+      .catch((error) => {
+        alert(error);
+        console.log(error, "error");
+      });
   };
 
   return (
