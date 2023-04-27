@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
 import axios from "axios";
 
-export const ReturnPage: FunctionComponent = () => {
+export const Return: FunctionComponent = () => {
   const navigate = useNavigate();
 
   const x = (id: number) => {

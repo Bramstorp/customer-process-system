@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
 import axios from "axios";
 
-export const ReturnKolli: FunctionComponent = () => {
+export const Kolli: FunctionComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
