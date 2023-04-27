@@ -3,8 +3,8 @@ import { useRouteError } from "react-router-dom";
 
 export const Statistics: FunctionComponent = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1 className="text-3xl mt-10 mb-10">Config</h1>
+    <div className="flex flex-col">
+      <h1 className="text-5xl mb-12">Dashboard</h1>
       <p>Statistics</p>
     </div>
   );
