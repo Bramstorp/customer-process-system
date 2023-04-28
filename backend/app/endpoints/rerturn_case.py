@@ -9,6 +9,7 @@ from app.models.rerturn_case import ReturnCreate, Returns, ReturnCaseWithRelatio
 from app.models.orders import Orders
 from app.models.customer import Customers
 
+from app.utils.email import send_email
 
 return_case_router = APIRouter()
 
@@ -29,6 +30,9 @@ def create_return_case(retrurn: ReturnCreate):
     session.add(db_return_case)
     session.commit()
     session.refresh(db_return_case)
+
+    send_email("returvare", retrurn.order_id, "test", customer.email)
+
     return db_return_case
 
 @return_case_router.get('/return-case/{return_id}', response_model=ReturnCaseWithRelationship, tags=['return case'], status_code=201, description='Get return case')

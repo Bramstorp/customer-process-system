@@ -5,8 +5,12 @@ from fastapi.encoders import jsonable_encoder
 
 from app.db.database import session
 from app.models.configuration import Configuration, ConfigurationUpdate, ConfigurationRead, ConfigurationCreate, ConfigurationReadWithUser
+from app.models.customer import Customers
 
 from app.endpoints.user import auth_handler
+
+
+from ..utils.email import send_email
 
 configuration_router = APIRouter()
 
@@ -59,3 +63,12 @@ def delete_company(id:int, user=Depends(auth_handler.get_current_user)):
     
     session.delete(company_found)
     session.commit()
+
+
+
+@configuration_router.get('/email', tags=['Email'], status_code=201, description='Test email')
+def test_email(company_id: int, customer_id: int):
+    company = session.get(Configuration, company_id)
+    customer = session.get(Customers, customer_id)
+    send_email("retursag", 1, company.name, customer)
+    return "Email sent"

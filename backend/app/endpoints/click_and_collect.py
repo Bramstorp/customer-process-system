@@ -20,7 +20,7 @@ def create_cnc_order(cnc_order: ClickAndCollectCreate):
 
     statement = select(ClickAndCollects).where(ClickAndCollects.order_id ==  cnc_order.order_id)
     existing_cnc_order = session.exec(statement).first()
-    if not existing_cnc_order:
+    if existing_cnc_order:
         return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Click and collect order already exists')
 
     if order.ordertype != 'click-and-collect':
