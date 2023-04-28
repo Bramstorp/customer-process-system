@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from starlette.responses import JSONResponse
 from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED, HTTP_204_NO_CONTENT
-from fastapi.encoders import jsonable_encoder
 from sqlmodel import select
 
 from app.db.database import session

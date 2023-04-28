@@ -1,14 +1,12 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 from starlette.responses import JSONResponse
-from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED, HTTP_204_NO_CONTENT
-from fastapi.encoders import jsonable_encoder
+from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED
 from sqlmodel import select
 
 from app.db.database import session
 from app.models.click_and_collect import ClickAndCollects
 from app.models.click_and_collect import ClickAndCollectCreate, ClickAndCollectReadWithRelationship
 from app.models.orders import Orders
-from app.models.rerturn_case import Returns
 
 cnc_routes = APIRouter()
 
