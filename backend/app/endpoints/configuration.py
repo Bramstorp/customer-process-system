@@ -37,7 +37,7 @@ def get_company(id: int, user=Depends(auth_handler.get_current_user)):
     
     return compnay
 
-@configuration_router.get('/user/company/', response_model=ConfigurationReadBase, tags=['company'])
+@configuration_router.get('/user/company', response_model=ConfigurationReadBase, tags=['company'])
 def get_company_by_user(user=Depends(auth_handler.get_current_user)):
     statement = select(Configuration).where(Configuration.company_user_id == user.id)
     existing_company = session.exec(statement).first()
@@ -61,7 +61,7 @@ def update_company(id: int, config: ConfigurationCreate, user=Depends(auth_handl
     session.commit()
     return company_found
 
-@configuration_router.put('/user/update-company/', response_model=Configuration, tags=['company'])
+@configuration_router.put('/user/update-company', response_model=Configuration, tags=['company'])
 def update_company_by_userid(config: ConfigurationCreate, user=Depends(auth_handler.get_current_user)):
     if not user:
         raise HTTPException(status_code=401, detail="UNAUTHORIZED USER")

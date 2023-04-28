@@ -32,7 +32,7 @@ export const CompanyContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/user/company/", config)
+      .get("http://localhost:8000/user/company", config)
       .then((res) => {
         setCompany(res.data);
       })
