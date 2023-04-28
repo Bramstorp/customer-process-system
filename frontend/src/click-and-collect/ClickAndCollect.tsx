@@ -1,14 +1,28 @@
 import React, { FunctionComponent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+
+interface ClickAndCollectResponseData {
+  return_date: string;
+  customer_id: number;
+  id: number;
+  kolli_amount: number;
+  order_id: number;
+}
+
+interface OrderData {
+  customer: {
+    id: string;
+  };
+}
 
 export const ClickAndCollect: FunctionComponent = () => {
   const navigate = useNavigate();
 
   const createClickAndCollect = (customerid: string, orderid: string) => {
     axios
-      .post("http://localhost:8000/create-click-and-collect", {
+      .post<ClickAndCollectResponseData>("http://localhost:8000/create-click-and-collect", {
         pickup_date: "2023-04-24T14:26:31.655000",
         orderstate: "picked-up",
         order_id: orderid,
@@ -21,33 +35,28 @@ export const ClickAndCollect: FunctionComponent = () => {
           });
         }
       })
-      .catch((error) => {
-        alert(error.response.data);
+      .catch((error: AxiosError) => {
+        alert(error.response?.data);
         console.log(error, "error");
       });
   };
 
-  const x = (id: number) => {
+  const getOrder = (id: number) => {
     axios
-      .get(`http://localhost:8000/order/${id}`)
+      .get<OrderData>(`http://localhost:8000/order/${id}`)
       .then((res) => {
-        createClickAndCollect(res.data.customer.id, id);
+        createClickAndCollect(res.data.customer.id, `${id}`);
       })
-      .catch((error) => {
-        alert(error.response.data);
+      .catch((error: AxiosError) => {
+        alert(error.response?.data);
         console.log(error, "error");
       });
   };
+
   return (
     <div className="pt-4 flex flex-col items-center justify-center">
-      <h1 className="text-3xl mt-10 mb-10">
-        Indsats order-nummer og tryk ENTER
-      </h1>
-      <Numpad
-        placeholder={"Indsæt ordrenummer"}
-        label={"Order-nummer"}
-        onClick={x}
-      />
+      <h1 className="text-3xl mt-10 mb-10">Indsats order-nummer og tryk ENTER</h1>
+      <Numpad placeholder={"Indsæt ordrenummer"} label={"Order-nummer"} onClick={getOrder} />
     </div>
   );
 };

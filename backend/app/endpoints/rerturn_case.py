@@ -30,7 +30,7 @@ def create_return_case(retrurn: ReturnCreate):
     session.commit()
     session.refresh(db_return_case)
 
-    send_email("returvare", retrurn.order_id, "test", customer.email)
+    send_email(source="returvare", orderid=retrurn.order_id, company_name="test", customer=customer)
 
     return db_return_case
 

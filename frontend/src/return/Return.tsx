@@ -6,7 +6,7 @@ import axios from "axios";
 export const Return: FunctionComponent = () => {
   const navigate = useNavigate();
 
-  const x = (id: number) => {
+  const getOrder = (id: number) => {
     axios
       .get(`http://localhost:8000/order/${id}`)
       .then((res) => {
@@ -20,14 +20,8 @@ export const Return: FunctionComponent = () => {
 
   return (
     <div className="pt-4 flex flex-col items-center justify-center">
-      <h1 className="text-3xl mt-10 mb-10">
-        Indsats order-nummer og tryk ENTER
-      </h1>
-      <Numpad
-        placeholder={"Indsæt ordrenummer"}
-        label={"Order-nummer"}
-        onClick={x}
-      />
+      <h1 className="text-3xl mt-10 mb-10">Indsats order-nummer og tryk ENTER</h1>
+      <Numpad placeholder={"Indsæt ordrenummer"} label={"Order-nummer"} onClick={getOrder} />
     </div>
   );
 };

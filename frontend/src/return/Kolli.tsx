@@ -7,7 +7,7 @@ export const Kolli: FunctionComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const x = (kolli: string) => {
+  const createReturnCase = (kolli: string) => {
     axios
       .post(`http://localhost:8000/create-return-case`, {
         return_date: "2023-04-24T14:26:31.655000",
@@ -33,11 +33,7 @@ export const Kolli: FunctionComponent = () => {
       <h1 className="text-3xl mt-10 mb-10">Vælg kolli antal</h1>
       <p className="text-2xl">Ordrenummer: {location.state.id}</p>
       <p className="text-2xl">Navn: {location.state.customer.name}</p>
-      <Numpad
-        label={"Kolli antal"}
-        placeholder={"indsæt kolliantal"}
-        onClick={x}
-      />
+      <Numpad label={"Kolli antal"} placeholder={"indsæt kolliantal"} onClick={createReturnCase} />
     </div>
   );
 };

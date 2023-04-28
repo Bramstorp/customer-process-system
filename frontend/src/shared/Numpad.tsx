@@ -1,23 +1,14 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 
-const btnLayout = [
-  ["7", "8", "9", "SLET"],
-  ["4", "5", "6", "ENTER"],
-  ["1", "2", "3"],
-  ["0"],
-];
+const btnLayout = [["7", "8", "9", "SLET"], ["4", "5", "6", "ENTER"], ["1", "2", "3"], ["0"]];
 
 interface Props {
-  onClick: (id?: string) => void;
+  onClick: (id: string | number | null) => void;
   placeholder?: string;
   label?: string;
 }
 
-export const Numpad: FunctionComponent<Props> = ({
-  onClick,
-  placeholder,
-  label,
-}) => {
+export const Numpad: FunctionComponent<Props> = ({ onClick, placeholder, label }) => {
   let [number, setNumber] = useState({
     num: "",
   });
@@ -49,9 +40,7 @@ export const Numpad: FunctionComponent<Props> = ({
 
   return (
     <div>
-      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-        {label}
-      </label>
+      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>
       <input
         type="number"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -67,13 +56,7 @@ export const Numpad: FunctionComponent<Props> = ({
                 btn === "0" ? "col-span-3" : btn === "ENTER" ? "row-span-3" : ""
               }`}
               key={i}
-              onClick={
-                btn === "SLET"
-                  ? removeLastClick
-                  : btn === "ENTER"
-                  ? enterClick
-                  : numClick
-              }
+              onClick={btn === "SLET" ? removeLastClick : btn === "ENTER" ? enterClick : numClick}
             >
               {btn}
             </button>
