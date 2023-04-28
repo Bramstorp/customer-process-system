@@ -11,7 +11,7 @@ import { ClickAndCollectConfirmed } from "./click-and-collect/Confirmed";
 import { ClickAndCollect } from "./click-and-collect/ClickAndCollect";
 
 import { Configuration } from "./configuration/Configuration";
-import { Endpoints } from "./configuration/Endpoints";
+import { Integration } from "./configuration/Integration";
 import { Locations } from "./configuration/Locations";
 import { Statistics } from "./configuration/Statistics";
 import { Settings } from "./configuration/Settings";
@@ -19,22 +19,20 @@ import { Settings } from "./configuration/Settings";
 import { RequireToken } from "./auth/Auth";
 import { Login } from "./account/Login";
 import ConfigLayout from "./hocs/ConfigLayout";
+import { CompanyContextProvider } from "./service/company/company.context";
 
 export default function Router() {
   return (
     <Routes>
       <Route path="/" element={<FrontPage />} />
       <Route path="click-and-collect" element={<ClickAndCollect />} />
-      <Route
-        path="click-and-collect/confirmed"
-        element={<ClickAndCollectConfirmed />}
-      />
+      <Route path="click-and-collect/confirmed" element={<ClickAndCollectConfirmed />} />
       <Route path="return" element={<Return />}></Route>
       <Route path="return/kolli" element={<Kolli />} />
       <Route path="return/confirm" element={<ReturnConfirmed />} />
       <Route path="admin" element={<Login />} />
       <Route path="/config/*" element={<ConfigRoutes />} />
-      <Route path="" element={<Navigate to="/" />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }
@@ -42,20 +40,22 @@ export default function Router() {
 const ConfigRoutes = () => {
   return (
     <ConfigLayout>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <RequireToken>
-              <Configuration />
-            </RequireToken>
-          }
-        />
-        <Route path="endpoints" element={<Endpoints />} />
-        <Route path="locations" element={<Locations />} />
-        <Route path="statistics" element={<Statistics />} />
-        <Route path="settings" element={<Settings />} />
-      </Routes>
+      <CompanyContextProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RequireToken>
+                <Configuration />
+              </RequireToken>
+            }
+          />
+          <Route path="Integration" element={<Integration />} />
+          <Route path="locations" element={<Locations />} />
+          <Route path="statistics" element={<Statistics />} />
+          <Route path="settings" element={<Settings />} />
+        </Routes>
+      </CompanyContextProvider>
     </ConfigLayout>
   );
 };

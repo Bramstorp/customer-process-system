@@ -17,7 +17,7 @@ def create_customer(customer: CustomerCreate):
     session.refresh(db_customer)
     return db_customer
 
-@customer_routes.get('/customer/{customer_id}', response_model=CustomerRead, tags=['customers'], status_code=201, description='Get new order')
+@customer_routes.get('/customer/{customer_id}', response_model=CustomerRead, tags=['customers'], status_code=201, description='Get customer by id')
 def get_customer(customer_id: int):
     customer = session.get(Customers, customer_id)
     if not customer:

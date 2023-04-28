@@ -10,6 +10,7 @@ from app.endpoints.orders import order_routes
 from app.endpoints.customer import customer_routes
 from app.endpoints.click_and_collect import cnc_routes
 
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -25,6 +26,11 @@ app.include_router(return_case_router)
 app.include_router(order_routes)
 app.include_router(customer_routes)
 app.include_router(cnc_routes)
+
+
+# only for demo purposes
+from app.endpoints.demo_endpoints import demo_routes
+app.include_router(demo_routes)
 
 @app.get("/health")
 async def is_alive():
