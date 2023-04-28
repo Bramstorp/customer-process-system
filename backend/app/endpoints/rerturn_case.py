@@ -26,7 +26,7 @@ def create_return_case(retrurn: ReturnCreate):
     if existing_returncase:
         return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Return case already exists')
 
-    db_return_case = Returns(**retrurn.dict(), order=order, customer=customer)
+    db_return_case = Returns(**retrurn.dict())
     session.add(db_return_case)
     session.commit()
     session.refresh(db_return_case)

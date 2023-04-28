@@ -11,7 +11,7 @@ customer_routes = APIRouter()
 
 @customer_routes.post('/create-customer', tags=['customers'], status_code=201, description='Create new orders')
 def create_customer(customer: CustomerCreate):        
-    db_customer = Customers.from_orm(customer)
+    db_customer = Customers(**customer.dict())
     session.add(db_customer)
     session.commit()
     session.refresh(db_customer)
