@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useState, useContext, useEffect } from "react";
-import { useRouteError } from "react-router-dom";
 import { CompanyContext } from "../service/company/company.context";
 
 export const Integration: FunctionComponent = () => {

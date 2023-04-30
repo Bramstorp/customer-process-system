@@ -14,7 +14,6 @@ import { Configuration } from "./configuration/Configuration";
 import { Integration } from "./configuration/Integration";
 import { Locations } from "./configuration/Locations";
 import { Statistics } from "./configuration/Statistics";
-import { Settings } from "./configuration/Settings";
 
 import { RequireToken } from "./auth/Auth";
 import { Login } from "./account/Login";
@@ -53,7 +52,6 @@ const ConfigRoutes = () => {
           <Route path="Integration" element={<Integration />} />
           <Route path="locations" element={<Locations />} />
           <Route path="statistics" element={<Statistics />} />
-          <Route path="settings" element={<Settings />} />
         </Routes>
       </CompanyContextProvider>
     </ConfigLayout>
