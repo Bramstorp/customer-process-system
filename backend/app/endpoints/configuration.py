@@ -99,14 +99,13 @@ def get_cases(user=Depends(auth_handler.get_current_user)):
     cnc = session.exec(select(ClickAndCollects)).all() 
     returns = session.exec(select(Returns)).all()    
     
-    cnc_dicts = [dict(row.__dict__) for row in cnc]
-    returns_dicts = [dict(row.__dict__) for row in returns]
-
-    cnc_flat = [{"type": "cnc", **row} for row in cnc_dicts]
-    returns_flat = [{"type": "returns", **row} for row in returns_dicts]
-
-    flat_map = cnc_flat + returns_flat
-    return flat_map
+    cnc = session.exec(select(ClickAndCollects)).all()
+    cnc_flat_map = [{"type": "cnc", "id": row.id, "date_of_action": row.pickup_date, "customer_id": row.customer_id, "order_id": row.order_id} for row in cnc]
+    
+    returns = session.exec(select(Returns)).all()
+    returns_flat_map = [{"type": "returns", "id": row.id, "order_id": row.order_id, "date_of_action": row.return_date, "customer_id": row.customer_id} for row in returns]
+    
+    return cnc_flat_map + returns_flat_map
 
 
 
