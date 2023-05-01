@@ -77,7 +77,7 @@ const ConfigLayout = (props: PropsWithChildren) => {
           </ul>
         </div>
       </aside>
-      <div className="p-4 sm:ml-64">{props.children}</div>
+      <div className="sm:ml-64">{props.children}</div>
     </>
   );
 };

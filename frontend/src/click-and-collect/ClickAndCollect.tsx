@@ -9,12 +9,14 @@ interface ClickAndCollectResponseData {
   id: number;
   kolli_amount: number;
   order_id: number;
+  ordertype: string;
 }
 
 interface OrderData {
   customer: {
     id: string;
   };
+  ordertype: string;
 }
 
 export const ClickAndCollect: FunctionComponent = () => {
@@ -45,7 +47,11 @@ export const ClickAndCollect: FunctionComponent = () => {
     axios
       .get<OrderData>(`${axios.defaults.baseURL}/order/${id}`)
       .then((res) => {
-        createClickAndCollect(res.data.customer.id, `${id}`);
+        if (res.data.ordertype === "click-and-collect") {
+          createClickAndCollect(res.data.customer.id, `${id}`);
+        } else {
+          alert("Order er ikke en click and collect ordre");
+        }
       })
       .catch((error: AxiosError) => {
         alert("Ordrenummeret findes ikke");
@@ -55,7 +61,8 @@ export const ClickAndCollect: FunctionComponent = () => {
 
   return (
     <div className="pt-4 flex flex-col items-center justify-center">
-      <h1 className="text-3xl mt-10 mb-10">Indsats order-nummer og tryk ENTER</h1>
+      <h1 className="text-3xl mt-10">Click and Collect</h1>
+      <h1 className="text-2xl mt-10 mb-10">Indsats order-nummer og tryk ENTER</h1>
       <Numpad placeholder={"Indsæt ordrenummer"} label={"Order-nummer"} onClick={getOrder} />
     </div>
   );

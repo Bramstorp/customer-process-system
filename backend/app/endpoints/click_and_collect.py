@@ -11,21 +11,11 @@ from app.models.orders import Orders
 cnc_routes = APIRouter()
 
 @cnc_routes.post('/create-click-and-collect', response_model=ClickAndCollectReadWithRelationship, tags=['click and collect'], status_code=201, description='Create new click and collect orders')
-def create_cnc_order(cnc_order: ClickAndCollectCreate):        
-    order = session.get(Orders, cnc_order.order_id)
-    if not order:
-        return JSONResponse(status_code=HTTP_404_NOT_FOUND, content='No order found for this customer')
-
+def create_cnc_order(cnc_order: ClickAndCollectCreate):
     statement = select(ClickAndCollects).where(ClickAndCollects.order_id ==  cnc_order.order_id)
     existing_cnc_order = session.exec(statement).first()
     if existing_cnc_order:
         return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Click and collect order already exists')
-
-    if order.ordertype != 'click-and-collect':
-        return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Order is not a click and collect order')
-    
-    if order.ordertype == 'return':
-        return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Cant create click and collect order for this order, return case already exists')
     
     db_cnc_order = ClickAndCollects(**cnc_order.dict())
     session.add(db_cnc_order)
