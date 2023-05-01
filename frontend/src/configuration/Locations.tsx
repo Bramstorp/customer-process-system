@@ -11,22 +11,25 @@ export const Locations: FunctionComponent = () => {
   const [locations, setLocations] = useState(initialLocations);
 
   return (
-    <MapContainer center={[56.162939, 10.203921]} zoom={7} style={{ height: "500px" }}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {locations.map(({ position, name, count }, index) => (
-        <CircleMarker
-          key={index}
-          center={position}
-          radius={count * 2}
-          fillColor="red"
-          color="red"
-          weight={1}
-          opacity={0.5}
-        >
-          <Popup>{name}</Popup>
-          <div className="marker-label">{count}</div>
-        </CircleMarker>
-      ))}
-    </MapContainer>
+    <>
+      <h1 className="text-5xl mb-12">locations</h1>
+      <MapContainer center={[56.162939, 10.203921]} zoom={7} style={{ height: "500px" }}>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {locations.map(({ position, name, count }, index) => (
+          <CircleMarker
+            key={index}
+            center={position}
+            radius={count * 2}
+            fillColor="red"
+            color="red"
+            weight={1}
+            opacity={0.5}
+          >
+            <Popup>{name}</Popup>
+            <div className="marker-label">{count}</div>
+          </CircleMarker>
+        ))}
+      </MapContainer>
+    </>
   );
 };

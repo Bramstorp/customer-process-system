@@ -17,6 +17,7 @@ export const CompanyContext = createContext([[], () => null]);
 
 export const CompanyContextProvider = ({ children }) => {
   const [company, setCompany] = useState<ICompanyContext>(null);
+  const [cases, setCases] = useState([]);
 
   const config = {
     headers: { Authorization: `Bearer ${fetchToken()}` },
@@ -43,9 +44,14 @@ export const CompanyContextProvider = ({ children }) => {
           window.location.href = "/admin";
         }
       });
+    axios.get("http://localhost:8000/get-cases", config).then((res) => {
+      setCases(res.data);
+    });
   }, []);
 
   return (
-    <CompanyContext.Provider value={{ company, updateCompany, createCompany }}>{children}</CompanyContext.Provider>
+    <CompanyContext.Provider value={{ company, cases, updateCompany, createCompany }}>
+      {children}
+    </CompanyContext.Provider>
   );
 };

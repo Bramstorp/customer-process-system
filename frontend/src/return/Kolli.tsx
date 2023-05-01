@@ -10,7 +10,6 @@ export const Kolli: FunctionComponent = () => {
   const createReturnCase = (kolli: string) => {
     axios
       .post(`http://localhost:8000/create-return-case`, {
-        return_date: "2023-04-24T14:26:31.655000",
         kolli_amount: kolli,
         order_id: location.state.id,
         customer_id: location.state.customer.id,

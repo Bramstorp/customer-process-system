@@ -6,6 +6,8 @@ from sqlmodel import select
 from app.db.database import session
 from app.models.configuration import Configuration, ConfigurationReadBase, ConfigurationCreate, ConfigurationReadWithUser
 from app.models.customer import Customers
+from app.models.click_and_collect import ClickAndCollects
+from app.models.rerturn_case import Returns
 
 from app.endpoints.user import auth_handler
 
@@ -87,6 +89,24 @@ def delete_company(id:int, user=Depends(auth_handler.get_current_user)):
     
     session.delete(company_found)
     session.commit()
+    
+
+@configuration_router.get('/get-cases', tags=['company'])
+def get_cases(user=Depends(auth_handler.get_current_user)):
+    if not user:
+        return JSONResponse(content="UNAUTHORIZED USER", status_code=HTTP_401_UNAUTHORIZED)
+    
+    cnc = session.exec(select(ClickAndCollects)).all() 
+    returns = session.exec(select(Returns)).all()    
+    
+    cnc_dicts = [dict(row.__dict__) for row in cnc]
+    returns_dicts = [dict(row.__dict__) for row in returns]
+
+    cnc_flat = [{"type": "cnc", **row} for row in cnc_dicts]
+    returns_flat = [{"type": "returns", **row} for row in returns_dicts]
+
+    flat_map = cnc_flat + returns_flat
+    return flat_map
 
 
 
