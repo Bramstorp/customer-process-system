@@ -32,5 +32,9 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - .env
+    environment:
+      - POSTGRES_USER=customer_process_system_dev
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=customer_process_system_db
 volumes:
   postgres_data:
