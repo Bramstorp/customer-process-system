@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, PropsWithChildren } from "react";
 
 import { fetchToken } from "../../auth/Auth";
 
@@ -12,12 +12,21 @@ type ICompany = {
   zebra_printer_ip: string;
   enable_api_integration: boolean;
 };
-type ICompanyContext = ICompany | null;
-export const CompanyContext = createContext([[], () => null]);
 
-export const CompanyContextProvider = ({ children }) => {
+type ICase = {
+  id: number;
+  type: string;
+  date_of_action: string;
+  customer_id: number;
+  order_id: number;
+};
+
+type ICompanyContext = ICompany | null;
+export const CompanyContext = createContext<ICompanyContext>(null);
+
+export const CompanyContextProvider = (props: PropsWithChildren) => {
   const [company, setCompany] = useState<ICompanyContext>(null);
-  const [cases, setCases] = useState([]);
+  const [cases, setCases] = useState<ICase | null>(null);
 
   axios.defaults.baseURL = "http://localhost:8000";
   if (company?.enable_api_integration) {
@@ -52,7 +61,7 @@ export const CompanyContextProvider = ({ children }) => {
 
   return (
     <CompanyContext.Provider value={{ company, cases, updateCompany, createCompany }}>
-      {children}
+      {props.children}
     </CompanyContext.Provider>
   );
 };
