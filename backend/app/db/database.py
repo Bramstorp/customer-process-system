@@ -1,6 +1,10 @@
 from sqlmodel import SQLModel, create_engine, Session
+import os
 
-DATABASE_URL = 'postgresql://customer_process_system_dev:customer_process_system_dev@db/customer_process_system_db'
+from dotenv import load_dotenv
+load_dotenv()
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 session = Session(bind=engine)

@@ -12,3 +12,4 @@ starlette==0.26.1
 pydantic==1.10.7
 pydantic[email]==1.10.7
 zebra==0.1.0
+python-dotenv==1.0.0

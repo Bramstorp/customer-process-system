@@ -11,6 +11,8 @@ services:
       - ./backend/:/usr/src/app/
     ports:
       - 8000:8000
+    env_file:
+      - .env
   frontend:
     container_name: frontend_dev
     build:
@@ -28,9 +30,7 @@ services:
     image: postgres:15.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=customer_process_system_dev
-      - POSTGRES_PASSWORD=customer_process_system_dev
-      - POSTGRES_DB=customer_process_system_db
+    env_file:
+      - .env
 volumes:
   postgres_data:
