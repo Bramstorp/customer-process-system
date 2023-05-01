@@ -38,6 +38,10 @@ export const CompanyContextProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          window.location.href = "/admin";
+        }
       });
   }, []);
 

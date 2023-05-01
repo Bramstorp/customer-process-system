@@ -9,25 +9,30 @@ export const Login: FunctionComponent = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const login = async () => {
+  const login = () => {
     if (username == "" && password == "") {
       return;
     } else {
+      setLoading(true);
       axios
         .post(`http://localhost:8000/login`, {
           username: username,
           password: password,
         })
-        .then(function (res) {
+        .then((res) => {
           if (res.data.token) {
             setToken(res.data.token);
             navigate("/config");
           }
         })
-        .catch(function (error) {
+        .catch((error) => {
           alert(error.response.data.detail);
           console.log(error, "error");
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
@@ -40,9 +45,7 @@ export const Login: FunctionComponent = () => {
         </h1>
         <form className="space-y-4 md:space-y-6" action="#">
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Username
-            </label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
             <input
               type="text"
               onChange={(e) => setUsername(e.target.value)}
@@ -52,9 +55,7 @@ export const Login: FunctionComponent = () => {
             />
           </div>
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Password
-            </label>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
             <input
               type="password"
               placeholder="••••••••"
@@ -67,6 +68,7 @@ export const Login: FunctionComponent = () => {
             type="submit"
             onClick={() => login()}
             className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded"
+            disabled={loading}
           >
             Sign in
           </button>

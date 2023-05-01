@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Collect Dashboard</title>
+    <style>
+        /* Generelle stile */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        h2 {
+            font-size: 18px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Stile for kort */
+        #map {
+            height: 300px;
+            width: 100%;
+        }
+
+        /* Stile for diagram */
+        .chart {
+            height: 400px;
+            width: 80%;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Collect Dashboard</h1>
+    <h2>Afhentning og levering</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Periode</th>
+                <th>Antal kunder</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Uge 12</td>
+                <td>21</td>
+            </tr>
+            <tr>
+                <td>Uge 15</td>
+                <td>50</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <table>
+        <thead>
+            <tr>
+                <th>Tidspunkt</th>
+                <th>Antal kunder</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Kl. 9</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>Kl. 10</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Kl. 11</td>
+                <td>15</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <h2>Kundernes placering</h2>
+    <div id="map"></div>
+    <br />
+    <table>
+        <thead>
+            <tr>
+                <th>Radius</th>
+                <th>Antal kunder</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0-5 km</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>5-10 km</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>10-15 km</td>
+                <td>20</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <h2>Omsætning pr. ordre</h2>
+    <div class="chart">
+        <!-- Her kan du indsætte en graf eller et diagram, f.eks. med Chart.js eller D3.js -->
+    </div>
+    <script>
+      // Her kan du indsætte JavaScript til at generere kortet med Google Maps API eller lignende
+    </script>
+</body>
+
+</html>
