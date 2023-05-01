@@ -8,12 +8,12 @@ export const Return: FunctionComponent = () => {
 
   const getOrder = (id: number) => {
     axios
-      .get(`http://localhost:8000/order/${id}`)
+      .get(`${axios.defaults.baseURL}/order/${id}`)
       .then((res) => {
         navigate("/return/kolli", { state: res.data });
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        alert("Ordrenummeret findes ikke");
         console.log(error, "error");
       });
   };

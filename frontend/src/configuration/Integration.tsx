@@ -40,20 +40,37 @@ export const Integration: FunctionComponent = () => {
               <label className="text-xl mb-2" htmlFor={key}>
                 {key}
               </label>
-              <input
-                className="border-2 border-gray-500 rounded-lg p-2"
-                type="text"
-                name={key}
-                value={currentCompany[key] == null ? "" : currentCompany[key]}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  const name = e.target.name;
-                  setCurrentCompany((prev) => ({
-                    ...prev,
-                    [name]: value,
-                  }));
-                }}
-              />
+              {typeof currentCompany[key] === "boolean" ? (
+                <input
+                  className="border-2 border-gray-500 rounded-lg p-2 mr-auto"
+                  type="checkbox"
+                  name={key}
+                  checked={currentCompany[key]}
+                  onChange={(e) => {
+                    const value = e.target.checked;
+                    const name = e.target.name;
+                    setCurrentCompany((prev) => ({
+                      ...prev,
+                      [name]: value,
+                    }));
+                  }}
+                />
+              ) : (
+                <input
+                  className="border-2 border-gray-500 rounded-lg p-2"
+                  type="text"
+                  name={key}
+                  value={currentCompany[key] == null ? "" : currentCompany[key]}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    const name = e.target.name;
+                    setCurrentCompany((prev) => ({
+                      ...prev,
+                      [name]: value,
+                    }));
+                  }}
+                />
+              )}
             </div>
           ))}
           <button className="bg-blue-500 text-white p-2 rounded-lg" type="submit">

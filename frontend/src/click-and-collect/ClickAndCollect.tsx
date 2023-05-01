@@ -43,12 +43,12 @@ export const ClickAndCollect: FunctionComponent = () => {
 
   const getOrder = (id: number) => {
     axios
-      .get<OrderData>(`http://localhost:8000/order/${id}`)
+      .get<OrderData>(`${axios.defaults.baseURL}/order/${id}`)
       .then((res) => {
         createClickAndCollect(res.data.customer.id, `${id}`);
       })
       .catch((error: AxiosError) => {
-        alert(error.response?.data);
+        alert("Ordrenummeret findes ikke");
         console.log(error, "error");
       });
   };

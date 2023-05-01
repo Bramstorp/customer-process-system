@@ -15,11 +15,6 @@ return_case_router = APIRouter()
 
 @return_case_router.post('/create-return-case', tags=['return case'], status_code=201, description='New return case')
 def create_return_case(retrurn: ReturnCreate):
-    order = session.get(Orders, retrurn.order_id)
-    customer = session.get(Customers, retrurn.customer_id)
-    if not order or not customer:
-        return JSONResponse(status_code=HTTP_404_NOT_FOUND, content='Order for customer not found')
-
     statement = select(Returns).where(Returns.order_id ==  retrurn.order_id)
     existing_returncase = session.exec(statement).first()
     if existing_returncase:

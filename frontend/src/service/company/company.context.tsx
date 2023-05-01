@@ -19,6 +19,11 @@ export const CompanyContextProvider = ({ children }) => {
   const [company, setCompany] = useState<ICompanyContext>(null);
   const [cases, setCases] = useState([]);
 
+  axios.defaults.baseURL = "http://localhost:8000";
+  if (company?.enable_api_integration) {
+    axios.defaults.baseURL = company.api_endpoint;
+  }
+
   const config = {
     headers: { Authorization: `Bearer ${fetchToken()}` },
   };
@@ -39,10 +44,6 @@ export const CompanyContextProvider = ({ children }) => {
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.status === 401) {
-          localStorage.removeItem("token");
-          window.location.href = "/admin";
-        }
       });
     axios.get("http://localhost:8000/get-cases", config).then((res) => {
       setCases(res.data);

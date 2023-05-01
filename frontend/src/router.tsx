@@ -23,17 +23,19 @@ import { Cases } from "./configuration/SystemCases";
 
 export default function Router() {
   return (
-    <Routes>
-      <Route path="/" element={<FrontPage />} />
-      <Route path="click-and-collect" element={<ClickAndCollect />} />
-      <Route path="click-and-collect/confirmed" element={<ClickAndCollectConfirmed />} />
-      <Route path="return" element={<Return />}></Route>
-      <Route path="return/kolli" element={<Kolli />} />
-      <Route path="return/confirm" element={<ReturnConfirmed />} />
-      <Route path="admin" element={<Login />} />
-      <Route path="/config/*" element={<ConfigRoutes />} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    <CompanyContextProvider>
+      <Routes>
+        <Route path="/" element={<FrontPage />} />
+        <Route path="click-and-collect" element={<ClickAndCollect />} />
+        <Route path="click-and-collect/confirmed" element={<ClickAndCollectConfirmed />} />
+        <Route path="return" element={<Return />}></Route>
+        <Route path="return/kolli" element={<Kolli />} />
+        <Route path="return/confirm" element={<ReturnConfirmed />} />
+        <Route path="admin" element={<Login />} />
+        <Route path="/config/*" element={<ConfigRoutes />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </CompanyContextProvider>
   );
 }
 
