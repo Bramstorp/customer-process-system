@@ -12,7 +12,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - .env
+      - ./backend/app/db/.env
   frontend:
     container_name: frontend_dev
     build:
@@ -31,7 +31,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - .env
+      - ./backend/app/db/.env
     environment:
       - POSTGRES_USER=customer_process_system_dev
       - POSTGRES_PASSWORD=mysecretpassword
