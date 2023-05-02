@@ -22,13 +22,20 @@ interface OrderData {
 export const ClickAndCollect: FunctionComponent = () => {
   const navigate = useNavigate();
 
-  const createClickAndCollect = (customerid: string, orderid: string) => {
+  const createClickAndCollect = (res) => {
     axios
       .post<ClickAndCollectResponseData>("http://localhost:8000/create-click-and-collect", {
-        pickup_date: "2023-04-24T14:26:31.655000",
-        orderstate: "picked-up",
-        order_id: orderid,
-        customer_id: customerid,
+        cnc_order: {
+          orderstate: "picked-up",
+        },
+        order: {
+          id: res.id,
+          orderdata: res.orderdata,
+          orderstatus: res.orderstatus,
+          ordertype: res.ordertype,
+          customer_id: res.customer.id,
+        },
+        customer: res.customer,
       })
       .then((res) => {
         if (res.data) {
@@ -38,6 +45,7 @@ export const ClickAndCollect: FunctionComponent = () => {
         }
       })
       .catch((error: AxiosError) => {
+        console.log(error.response);
         alert(error.response?.data);
         console.log(error, "error");
       });
@@ -48,7 +56,7 @@ export const ClickAndCollect: FunctionComponent = () => {
       .get<OrderData>(`${axios.defaults.baseURL}/order/${id}`)
       .then((res) => {
         if (res.data.ordertype === "click-and-collect") {
-          createClickAndCollect(res.data.customer.id, `${id}`);
+          createClickAndCollect(res.data, id);
         } else {
           alert("Order er ikke en click and collect ordre");
         }

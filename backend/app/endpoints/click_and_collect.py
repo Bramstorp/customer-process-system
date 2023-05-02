@@ -12,20 +12,17 @@ from app.models.customer import Customers
 cnc_routes = APIRouter()
 
 @cnc_routes.post('/create-click-and-collect', response_model=ClickAndCollectReadWithRelationship, tags=['click and collect'], status_code=201, description='Create new click and collect orders')
-def create_cnc_order(cnc_order: ClickAndCollectCreate, order: Orders, customer: Customers):
-    db_order = session.get(Orders, cnc_order.order_id)
-    db_customer = session.get(Customers, cnc_order.customer_id)
-    
-    if not db_order or not db_customer:
-        db_order = session.add(**order.dict())
-        db_customer = session.add(**customer.dict())
-    
-    statement = select(ClickAndCollects).where(ClickAndCollects.order_id ==  cnc_order.order_id)
+def create_cnc_order(cnc_order: ClickAndCollectCreate, order: Orders, customer: Customers):    
+    statement = select(ClickAndCollects).where(ClickAndCollects.order_id ==  order.id)
     existing_cnc_order = session.exec(statement).first()
     if existing_cnc_order:
         return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Click and collect order already exists')
     
-    db_cnc_order = ClickAndCollects(**cnc_order.dict(), order=db_order, customer=db_customer)
+    existing_order = session.get(Orders, order.id)
+    if existing_order:
+        return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Order already exists')
+    
+    db_cnc_order = ClickAndCollects(**cnc_order.dict(), order=order, customer=customer)
     session.add(db_cnc_order)
     session.commit()
     session.refresh(db_cnc_order)

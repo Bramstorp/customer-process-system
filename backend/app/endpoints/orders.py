@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from starlette.responses import JSONResponse
 from starlette.status import HTTP_404_NOT_FOUND
 from sqlmodel import select
+from fastapi import HTTPException
 
 from app.db.database import session
 from app.models.customer import Customers
@@ -12,6 +13,10 @@ order_routes = APIRouter()
 
 @order_routes.post('/create-orders', tags=['orders'], status_code=201, description='Create new orders')
 def create_order(order: OrderCreate):  
+    exist_order = session.query(Orders).filter(Orders.id == order.id).first()
+    if exist_order:
+        raise HTTPException(status_code=400, detail="Postal code already exists")
+    
     customer = session.get(Customers, order.customer_id)
     if not customer:
         return JSONResponse(status_code=HTTP_404_NOT_FOUND, content='Customer not found')

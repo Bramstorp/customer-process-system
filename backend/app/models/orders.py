@@ -16,6 +16,7 @@ class Orders(OrderBase, table=True):
     
 class OrderCreate(OrderBase):
     customer_id: int
+    id: int
 
 class OrderRead(OrderBase):
     pass
