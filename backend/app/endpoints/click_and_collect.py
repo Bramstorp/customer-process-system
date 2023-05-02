@@ -7,17 +7,25 @@ from app.db.database import session
 from app.models.click_and_collect import ClickAndCollects
 from app.models.click_and_collect import ClickAndCollectCreate, ClickAndCollectReadWithRelationship
 from app.models.orders import Orders
+from app.models.customer import Customers
 
 cnc_routes = APIRouter()
 
 @cnc_routes.post('/create-click-and-collect', response_model=ClickAndCollectReadWithRelationship, tags=['click and collect'], status_code=201, description='Create new click and collect orders')
 def create_cnc_order(cnc_order: ClickAndCollectCreate):
+    order = session.get(Orders, cnc_order.order_id)
+    customer = session.get(Customers, cnc_order.customer_id)
+    
+    if not order or not customer:
+        session.add(order)
+        session.add(customer)
+    
     statement = select(ClickAndCollects).where(ClickAndCollects.order_id ==  cnc_order.order_id)
     existing_cnc_order = session.exec(statement).first()
     if existing_cnc_order:
         return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Click and collect order already exists')
     
-    db_cnc_order = ClickAndCollects(**cnc_order.dict())
+    db_cnc_order = ClickAndCollects(**cnc_order.dict(), order=order, customer=customer)
     session.add(db_cnc_order)
     session.commit()
     session.refresh(db_cnc_order)
