@@ -20,7 +20,7 @@ def create_cnc_order(cnc_order: ClickAndCollectCreate, order: Orders, customer: 
     
     existing_order = session.get(Orders, order.id)
     if existing_order:
-        return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Order already exists')
+        order = existing_order
     
     db_cnc_order = ClickAndCollects(**cnc_order.dict(), order=order, customer=customer)
     session.add(db_cnc_order)

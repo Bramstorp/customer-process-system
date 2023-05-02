@@ -20,6 +20,9 @@ def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers
     if existing_returncase:
         return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Return case already exists')
 
+    existing_order = session.get(Orders, order.id)
+    if existing_order:
+        order = existing_order
     
     db_return_case = Returns(**retrurn.dict(), order=order, customer=customer)
     session.add(db_return_case)
