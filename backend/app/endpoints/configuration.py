@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from starlette.responses import JSONResponse
-from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED, HTTP_204_NO_CONTENT
+from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED, HTTP_204_NO_CONTENT, HTTP_409_CONFLICT
 from sqlmodel import select
 
 from app.db.database import session
@@ -22,7 +22,11 @@ def create_company(config: ConfigurationCreate, user=Depends(auth_handler.get_cu
     if not user:
         return JSONResponse(content="UNAUTHORIZED USER", status_code=HTTP_401_UNAUTHORIZED)
     
-    created_config = Configuration(**config.dict())
+    existing_company = session.exec(select(Configuration).where(Configuration.company_user_id == user.id)).first()
+    if existing_company:
+        return JSONResponse(content="Company already exists", status_code=HTTP_409_CONFLICT)
+    
+    created_config = Configuration(**config.dict(), company_user_id=user.id, company_user=user)
     session.add(created_config)
     session.commit()
     
@@ -87,7 +91,9 @@ def delete_company(id:int, user=Depends(auth_handler.get_current_user)):
     if company_found.company_user_id != user.id:
         return JSONResponse(content="U dont have permision to update this company", status_code=HTTP_401_UNAUTHORIZED)
     
-    session.delete(company_found)
+    if company_found:
+        session.delete(company_found)
+
     session.commit()
     
 

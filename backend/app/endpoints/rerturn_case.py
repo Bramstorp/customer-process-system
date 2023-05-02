@@ -14,18 +14,20 @@ return_case_router = APIRouter()
 
 
 @return_case_router.post('/create-return-case', tags=['return case'], status_code=201, description='New return case')
-def create_return_case(retrurn: ReturnCreate):
-    statement = select(Returns).where(Returns.order_id ==  retrurn.order_id)
+def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers):
+    statement = select(Returns).where(Returns.order_id ==  order.id)
     existing_returncase = session.exec(statement).first()
     if existing_returncase:
         return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Return case already exists')
 
-    db_return_case = Returns(**retrurn.dict())
+    
+    db_return_case = Returns(**retrurn.dict(), order=order, customer=customer)
     session.add(db_return_case)
     session.commit()
     session.refresh(db_return_case)
 
-    send_email(source="returvare", orderid=retrurn.order_id, company_name="test", customer=customer)
+    if db_return_case and order and customer:
+        send_email(source="returvare", orderid=order.id, company_name="test", customer=customer)
 
     return db_return_case
 

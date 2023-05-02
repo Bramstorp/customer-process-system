@@ -38,7 +38,7 @@ export const CompanyContextProvider = (props: PropsWithChildren) => {
   };
 
   const createCompany = (company: ICompany) => {
-    axios.post("http://localhost:8000/create-company/", company, config);
+    axios.post("http://localhost:8000/create-company", company, config);
   };
 
   const updateCompany = (company: ICompany) => {

@@ -7,14 +7,24 @@ export const Kolli: FunctionComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log(location.state);
+
   const createReturnCase = (kolli: string) => {
     axios
       .post(`http://localhost:8000/create-return-case`, {
-        kolli_amount: kolli,
-        order_id: location.state.id,
-        customer_id: location.state.customer.id,
+        retrurn: { kolli_amount: kolli },
+        order: {
+          id: location.state.id,
+          orderdata: location.state.orderdata,
+          orderstatus: location.state.orderstatus,
+          ordertype: location.state.ordertype,
+          customer_id: location.state.customer.id,
+        },
+        customer: location.state.customer,
       })
       .then((res) => {
+        console.log(res.data);
+        console.log(res);
         if (res.data) {
           navigate("/return/confirm", {
             state: { orderid: location.state.orderid },
@@ -22,7 +32,7 @@ export const Kolli: FunctionComponent = () => {
         }
       })
       .catch(function (error) {
-        alert(error.response.data);
+        alert("Der skete en fejl, prøv igen");
         console.log(error, "error");
       });
   };

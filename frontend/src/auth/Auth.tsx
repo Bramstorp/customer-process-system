@@ -24,7 +24,8 @@ export const fetchToken = () => {
     localStorage.removeItem("token");
     return null;
   }
-  return localStorage.getItem("token");
+
+  return token;
 };
 
 export function RequireToken(props: PropsWithChildren) {

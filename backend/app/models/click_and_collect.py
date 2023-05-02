@@ -18,8 +18,8 @@ class ClickAndCollects(ClickAndCollectBase, table=True):
     time_to_pickup: Optional[str] = Field(default="")
 
 class ClickAndCollectCreate(ClickAndCollectBase):
-    order_id: int
-    customer_id: int
+    order: Orders
+    customer: Customers
 
 class ClickAndCollectRead(ClickAndCollectBase):
     pass
