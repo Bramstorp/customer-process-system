@@ -25,7 +25,11 @@ export const Locations: FunctionComponent = () => {
             weight={1}
             opacity={0.5}
           >
-            <Popup>{name}</Popup>
+            <Popup>
+              <p>
+                {name}: {count}
+              </p>
+            </Popup>
             <div className="marker-label">{count}</div>
           </CircleMarker>
         ))}

@@ -23,16 +23,14 @@ export const Kolli: FunctionComponent = () => {
         customer: location.state.customer,
       })
       .then((res) => {
-        console.log(res.data);
-        console.log(res);
         if (res.data) {
           navigate("/return/confirm", {
             state: { orderid: location.state.orderid },
           });
         }
       })
-      .catch(function (error) {
-        alert("Der skete en fejl, prøv igen");
+      .catch((error) => {
+        alert(error.response.data || "Der skete en fejl, prøv igen");
         console.log(error, "error");
       });
   };

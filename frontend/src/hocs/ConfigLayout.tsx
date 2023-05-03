@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
-import { FiMap, FiSkipBack, FiCodepen, FiHome, FiList } from "react-icons/fi";
+import { FiMap, FiSkipBack, FiCodepen, FiHome, FiList, FiArchive } from "react-icons/fi";
 
 const ConfigLayout = (props: PropsWithChildren) => {
   const navigate = useNavigate();
@@ -49,20 +49,20 @@ const ConfigLayout = (props: PropsWithChildren) => {
             </li>
             <li>
               <Link
+                to="/config/cases"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FiArchive />
+                <span className="ml-3">Case overview</span>
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/config/integration"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <FiCodepen />
                 <span className="ml-3">Integration</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/config/cases"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                <FiCodepen />
-                <span className="ml-3">Case overview</span>
               </Link>
             </li>
             <li>

@@ -38,7 +38,7 @@ def demo_order(order_id):
     }
     order = {
         "orderstate": orderstate,
-        "ordertype": "click-and-collect" if order_id == "1" else ordertype,
+        "ordertype": "click-and-collect" if (int(order_id) % 2) == 0 else orderstate,
         "orderdata": orderdata,
         "customer": customer,
         "id": order_id

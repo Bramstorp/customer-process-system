@@ -10,6 +10,7 @@ export const ReturnConfirmed: FunctionComponent = () => {
 
   return (
     <div className="pt-4 flex flex-col items-center justify-center">
+      <h1 className="text-3xl mt-10 mb-10">Tak for din retur</h1>
       <ol type="1">
         <li className="text-2xl">1. Sæt en label på hver kolli du har.</li>
         <li className="text-2xl">2. Placere dem i returområet. (Kasse/Palle)</li>

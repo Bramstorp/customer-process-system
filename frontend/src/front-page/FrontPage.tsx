@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
-import { FiPackage } from "react-icons/fi";
-import { FiShoppingCart } from "react-icons/fi";
+import { FiPackage, FiShoppingCart } from "react-icons/fi";
 
 export const FrontPage: FunctionComponent = () => {
   return (

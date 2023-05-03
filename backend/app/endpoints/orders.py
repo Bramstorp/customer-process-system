@@ -15,7 +15,7 @@ order_routes = APIRouter()
 def create_order(order: OrderCreate):  
     exist_order = session.query(Orders).filter(Orders.id == order.id).first()
     if exist_order:
-        raise HTTPException(status_code=400, detail="Postal code already exists")
+        raise HTTPException(status_code=400, detail="Order already exists")
     
     customer = session.get(Customers, order.customer_id)
     if not customer:

@@ -13,7 +13,7 @@ type ICompany = {
   enable_api_integration: boolean;
 };
 
-type ICase = {
+export type ICase = {
   id: number;
   type: string;
   date_of_action: string;
