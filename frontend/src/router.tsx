@@ -19,7 +19,7 @@ import { RequireToken } from "./auth/Auth";
 import { Login } from "./account/Login";
 import ConfigLayout from "./hocs/ConfigLayout";
 import { CompanyContextProvider } from "./service/company/company.context";
-import { Cases } from "./configuration/SystemCases";
+import { Cases } from "./configuration/Cases";
 
 export default function Router() {
   return (

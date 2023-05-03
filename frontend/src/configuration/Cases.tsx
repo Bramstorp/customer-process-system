@@ -4,6 +4,23 @@ import { CompanyContext } from "../service/company/company.context";
 export const Cases: FunctionComponent = () => {
   const { cases } = useContext(CompanyContext);
 
+  function formatDate(dateString: Date) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("da-DK", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
+  }
+
+  const TYPE_MAP = {
+    cnc: "Click and Collect",
+    returns: "Return",
+  };
+
   return (
     <div className="flex flex-col">
       <h1 className="text-5xl mb-10">Cases</h1>
@@ -38,10 +55,10 @@ export const Cases: FunctionComponent = () => {
                   <p className="text-gray-900 whitespace-no-wrap">{caseData.id}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                  <p className="text-gray-900 whitespace-no-wrap">{caseData.type}</p>
+                  <p className="text-gray-900 whitespace-no-wrap">{TYPE_MAP[caseData.type]}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                  <p className="text-gray-900 whitespace-no-wrap">{caseData.date_of_action}</p>
+                  <p className="text-gray-900 whitespace-no-wrap">{formatDate(caseData.date_of_action)}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 text-sm">
                   <p className="text-gray-900 whitespace-no-wrap">{caseData.customer_id}</p>
