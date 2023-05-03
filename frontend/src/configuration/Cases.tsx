@@ -24,7 +24,7 @@ export const Cases: FunctionComponent = () => {
   return (
     <div className="flex flex-col">
       <h1 className="text-5xl mb-10">Cases</h1>
-      <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+      <div className="inline-block min-w-full shadow rounded-lg overflow-hidden mb-10">
         <table className="min-w-full leading-normal">
           <thead>
             <tr>
