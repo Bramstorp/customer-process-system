@@ -19,6 +19,8 @@ export const Kolli: FunctionComponent = () => {
           orderstatus: location.state.orderstatus,
           ordertype: location.state.ordertype,
           customer_id: location.state.customer.id,
+          currecy: location.state.currency,
+          price_amount: location.state.price_amount,
         },
         customer: location.state.customer,
       })

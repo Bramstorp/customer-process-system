@@ -34,6 +34,8 @@ export const ClickAndCollect: FunctionComponent = () => {
           orderstatus: res.orderstatus,
           ordertype: res.ordertype,
           customer_id: res.customer.id,
+          currecy: res.currency,
+          total_price: res.total_price,
         },
         customer: res.customer,
       })

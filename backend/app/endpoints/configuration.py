@@ -8,6 +8,7 @@ from app.models.configuration import Configuration, ConfigurationReadBase, Confi
 from app.models.customer import Customers
 from app.models.click_and_collect import ClickAndCollects
 from app.models.rerturn_case import Returns
+from app.models.orders import Orders
 
 from app.endpoints.user import auth_handler
 
@@ -102,16 +103,12 @@ def get_cases(user=Depends(auth_handler.get_current_user)):
     if not user:
         return JSONResponse(content="UNAUTHORIZED USER", status_code=HTTP_401_UNAUTHORIZED)
     
-    cnc = session.exec(select(ClickAndCollects)).all() 
-    returns = session.exec(select(Returns)).all()    
-    
-    cnc = session.exec(select(ClickAndCollects)).all()
+    cnc = session.exec(select(ClickAndCollects, Orders).where(ClickAndCollects.order_id == Orders.id)).all() 
+    returns = session.exec(select(Returns, Orders).where(Returns.order_id == Orders.id)).all()    
     cnc_flat_map = [{"type": "cnc", "id": row.id, "date_of_action": row.pickup_date, "customer_id": row.customer_id, "order_id": row.order_id} for row in cnc]
-    
-    returns = session.exec(select(Returns)).all()
     returns_flat_map = [{"type": "returns", "id": row.id, "order_id": row.order_id, "date_of_action": row.return_date, "customer_id": row.customer_id} for row in returns]
     
-    return cnc_flat_map + returns_flat_map
+    return  cnc_flat_map + returns_flat_map
 
 
 

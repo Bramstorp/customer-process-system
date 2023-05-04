@@ -40,8 +40,10 @@ def demo_order(order_id):
         "orderstate": orderstate,
         "ordertype": "click-and-collect" if (int(order_id) % 2) == 0 else orderstate,
         "orderdata": orderdata,
+        "total_price": random.randint(1, 100000),
+        "currency": "DKK",
         "customer": customer,
-        "id": order_id
+        "id": order_id,
     }
     return order
 

@@ -19,7 +19,7 @@ import { RequireToken } from "./auth/Auth";
 import { Login } from "./account/Login";
 import ConfigLayout from "./hocs/ConfigLayout";
 import { CompanyContextProvider } from "./service/company/company.context";
-import { Cases } from "./configuration/Cases";
+import { CustomerCases } from "./configuration/CustomerCases";
 
 export default function Router() {
   return (
@@ -55,7 +55,7 @@ const ConfigRoutes = () => {
           <Route path="integration" element={<Integration />} />
           <Route path="locations" element={<Locations />} />
           <Route path="statistics" element={<Statistics />} />
-          <Route path="cases" element={<Cases />} />
+          <Route path="customer-cases" element={<CustomerCases />} />
         </Routes>
       </CompanyContextProvider>
     </ConfigLayout>

@@ -8,6 +8,8 @@ class OrderBase(SQLModel):
     orderstate: str = Field(default="ordered")
     ordertype: str
     orderdata: datetime
+    total_price: int
+    currency: str = Field(default="DKK")
 
 class Orders(OrderBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)

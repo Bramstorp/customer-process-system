@@ -40,20 +40,20 @@ const ConfigLayout = (props: PropsWithChildren) => {
             </li>
             <li>
               <Link
+                to="/config/customer-cases"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FiArchive />
+                <span className="ml-3">Customer cases</span>
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/config/locations"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <FiMap />
                 <span className="ml-3">Locations</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/config/cases"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
-                <FiArchive />
-                <span className="ml-3">Case overview</span>
               </Link>
             </li>
             <li>

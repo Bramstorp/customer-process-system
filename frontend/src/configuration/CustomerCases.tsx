@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import { CompanyContext } from "../service/company/company.context";
 
-export const Cases: FunctionComponent = () => {
+export const CustomerCases: FunctionComponent = () => {
   const { cases } = useContext(CompanyContext);
 
   function formatDate(dateString: Date) {
@@ -23,7 +23,7 @@ export const Cases: FunctionComponent = () => {
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-5xl mb-10">Cases</h1>
+      <h1 className="text-5xl mb-10">Customer data</h1>
       <div className="inline-block min-w-full shadow rounded-lg overflow-hidden mb-10">
         <table className="min-w-full leading-normal">
           <thead>
@@ -42,6 +42,12 @@ export const Cases: FunctionComponent = () => {
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Order id
+              </th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Currency
+              </th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Total price
               </th>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Status
@@ -65,6 +71,12 @@ export const Cases: FunctionComponent = () => {
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 text-sm">
                   <p className="text-gray-900 whitespace-no-wrap">{caseData.order_id}</p>
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 text-sm">
+                  <p className="text-gray-900 whitespace-no-wrap">{caseData.currency}</p>
+                </td>
+                <td className="px-5 py-5 border-b border-gray-200 text-sm">
+                  <p className="text-gray-900 whitespace-no-wrap">{caseData.total_price}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 text-sm">
                   <span
