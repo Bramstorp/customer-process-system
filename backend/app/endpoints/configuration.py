@@ -105,8 +105,8 @@ def get_cases(user=Depends(auth_handler.get_current_user)):
     
     cnc = session.exec(select(ClickAndCollects, Orders).where(ClickAndCollects.order_id == Orders.id)).all() 
     returns = session.exec(select(Returns, Orders).where(Returns.order_id == Orders.id)).all()    
-    cnc_flat_map = [{"type": "cnc", "id": row.id, "date_of_action": row.pickup_date, "customer_id": row.customer_id, "order_id": row.order_id} for row in cnc]
-    returns_flat_map = [{"type": "returns", "id": row.id, "order_id": row.order_id, "date_of_action": row.return_date, "customer_id": row.customer_id} for row in returns]
+    cnc_flat_map = [{"type": "cnc", "id": row[0].id, "date_of_action": row[0].pickup_date, "customer_id": row[0].customer_id, "order_id": row[0].order_id, "order": row[1]} for row in cnc]
+    returns_flat_map = [{"type": "returns", "id": row[0].id, "order_id": row[0].order_id, "date_of_action": row[0].return_date, "customer_id": row[0].customer_id, "order": row[1]} for row in returns]
     
     return  cnc_flat_map + returns_flat_map
 

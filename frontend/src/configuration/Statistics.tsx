@@ -7,6 +7,8 @@ export const Statistics: FunctionComponent = () => {
   const [endDate, setEndDate] = useState("");
   const [caseType, setCaseType] = useState("all");
 
+  console.log(cases);
+
   function formatDate(dateString: Date) {
     const date = new Date(dateString);
     return date.toLocaleDateString("da-DK", {
@@ -101,9 +103,6 @@ export const Statistics: FunctionComponent = () => {
               Total pris
             </th>
             <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-              Currency
-            </th>
-            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
               Customer id
             </th>
             <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -127,10 +126,9 @@ export const Statistics: FunctionComponent = () => {
                 <p className="text-gray-900 whitespace-no-wrap">{formatDate(caseData.date_of_action)}</p>
               </td>
               <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                <p className="text-gray-900 whitespace-no-wrap">{caseData.total_price}</p>
-              </td>
-              <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                <p className="text-gray-900 whitespace-no-wrap">{caseData.currency}</p>
+                <p className="text-gray-900 whitespace-no-wrap">
+                  {caseData.order.total_price} {caseData.order.currency}
+                </p>
               </td>
               <td className="px-5 py-5 border-b border-gray-200 text-sm">
                 <p className="text-gray-900 whitespace-no-wrap">{caseData.customer_id}</p>
