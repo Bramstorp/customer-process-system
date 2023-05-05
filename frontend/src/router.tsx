@@ -20,6 +20,7 @@ import { Login } from "./account/Login";
 import ConfigLayout from "./hocs/ConfigLayout";
 import { CompanyContextProvider } from "./service/company/company.context";
 import { CustomerCases } from "./configuration/CustomerCases";
+import { Turnover } from "./configuration/Turnover";
 
 export default function Router() {
   return (
@@ -56,6 +57,8 @@ const ConfigRoutes = () => {
           <Route path="locations" element={<Locations />} />
           <Route path="statistics" element={<Statistics />} />
           <Route path="customer-cases" element={<CustomerCases />} />
+          <Route path="turnover" element={<Turnover />} />
+          <Route path="*" element={<Navigate to="/config" />} />
         </Routes>
       </CompanyContextProvider>
     </ConfigLayout>

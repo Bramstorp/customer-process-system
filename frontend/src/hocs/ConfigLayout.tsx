@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
-import { FiMap, FiSkipBack, FiCodepen, FiHome, FiList, FiArchive } from "react-icons/fi";
+import { FiMap, FiSkipBack, FiCodepen, FiHome, FiList, FiArchive, FiBriefcase } from "react-icons/fi";
 
 const ConfigLayout = (props: PropsWithChildren) => {
   const navigate = useNavigate();
@@ -36,6 +36,15 @@ const ConfigLayout = (props: PropsWithChildren) => {
               >
                 <FiList />
                 <span className="ml-3">Statistics</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/config/turnover"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FiBriefcase />
+                <span className="ml-3">Turnover</span>
               </Link>
             </li>
             <li>
