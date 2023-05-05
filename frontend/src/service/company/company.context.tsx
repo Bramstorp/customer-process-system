@@ -38,14 +38,18 @@ export const CompanyContextProvider = (props: PropsWithChildren) => {
   };
 
   const createCompany = (company: ICompany) => {
-    axios.post("http://localhost:8000/create-company", company, config);
+    axios.post("http://localhost:8000/create-company", company, config).then((res) => {
+      setCompany(res.data);
+    });
   };
 
   const updateCompany = (company: ICompany) => {
-    axios.put("http://localhost:8000/user/update-company", company, config);
+    axios.put("http://localhost:8000/user/update-company", company, config).then((res) => {
+      setCompany(res.data);
+    });
   };
 
-  useEffect(() => {
+  const getCompany = () => {
     axios
       .get("http://localhost:8000/user/company", config)
       .then((res) => {
@@ -54,9 +58,17 @@ export const CompanyContextProvider = (props: PropsWithChildren) => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const getCases = () => {
     axios.get("http://localhost:8000/get-cases", config).then((res) => {
       setCases(res.data);
     });
+  };
+
+  useEffect(() => {
+    getCompany();
+    getCases();
   }, []);
 
   return (

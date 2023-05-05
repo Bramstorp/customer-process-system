@@ -7,8 +7,6 @@ export const Statistics: FunctionComponent = () => {
   const [endDate, setEndDate] = useState("");
   const [caseType, setCaseType] = useState("all");
 
-  console.log(cases);
-
   function formatDate(dateString: Date) {
     const date = new Date(dateString);
     return date.toLocaleDateString("da-DK", {
