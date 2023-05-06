@@ -5,7 +5,7 @@ export const setToken = (token: string) => {
   localStorage.setItem("token", token);
 };
 
-const parseJwt = (token: any) => {
+const parseJwt = (token: string) => {
   try {
     return JSON.parse(atob(token.split(".")[1]));
   } catch (e) {

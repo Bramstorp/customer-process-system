@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useContext } from "react";
-import { CompanyContext, ICase } from "../service/company/company.context";
+import { CompanyContext } from "../service/company/company.context";
 
-interface CompanyContextType {
-  cases: Array<ICase>;
-}
+import { ICase } from "./types/cases.type";
 
 export const Configuration: FunctionComponent = () => {
-  const { cases } = useContext<CompanyContextType>(CompanyContext);
+  const { cases } = useContext(CompanyContext);
 
   const today = new Date().toISOString().slice(0, 10);
 

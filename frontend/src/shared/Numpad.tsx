@@ -3,7 +3,7 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 const btnLayout = [["7", "8", "9", "SLET"], ["4", "5", "6", "ENTER"], ["1", "2", "3"], ["0"]];
 
 interface Props {
-  onClick: (id: string | number | null) => void;
+  onClick: (id?: string | number, kolli?: string) => void;
   placeholder?: string;
   label?: string;
 }

@@ -3,33 +3,16 @@ import React, { useState, createContext, useEffect, PropsWithChildren } from "re
 
 import { fetchToken } from "../../auth/Auth";
 
-type ICompany = {
-  location: string;
-  company_name: string;
-  company_logo: string;
-  api_endpoint: string;
-  api_token: string;
-  zebra_printer_ip: string;
-  enable_api_integration: boolean;
-};
+import { ICase, ICompany, ICompanyContext } from "../../configuration/types/cases.type";
 
-export type ICase = {
-  id: number;
-  type: string;
-  date_of_action: string;
-  customer_id: number;
-  order_id: number;
-};
-
-type ICompanyContext = ICompany | null;
-export const CompanyContext = createContext<ICompanyContext>(null);
+export const CompanyContext = createContext<ICompanyContext>({} as ICompanyContext);
 
 export const CompanyContextProvider = (props: PropsWithChildren) => {
-  const [company, setCompany] = useState<ICompanyContext>(null);
-  const [cases, setCases] = useState<ICase | null>(null);
+  const [company, setCompany] = useState<ICompany>({} as ICompany);
+  const [cases, setCases] = useState<ICase[] | null>(null);
 
   axios.defaults.baseURL = "http://localhost:8000";
-  if (company?.enable_api_integration) {
+  if (company && company.enable_api_integration) {
     axios.defaults.baseURL = company.api_endpoint;
   }
 
