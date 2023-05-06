@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  nginx:
+    restart: unless-stopped
+    container_name: nginx_prod
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile.prod
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx:/etc/nginx/default.conf
+    depends_on:
+      - backend
+  backend:
+    container_name: backend_fastapi_prod
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend/:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./backend/app/db/.env
+  db:
+    container_name: postgresql_prod
+    image: postgres:15.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./backend/app/db/.env.prod
+    environment:
+      - POSTGRES_USER=customer_process_system_prod
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=customer_process_system_db
+volumes:
+  postgres_data:
