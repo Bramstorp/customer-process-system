@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
 import axios, { AxiosError } from "axios";
 
+import { IOrderNoCustomer } from "../types/order.type";
+import { ICustomer } from "../types/customer.type";
+
 interface ClickAndCollectResponseData {
   return_date: string;
   customer_id: number;
@@ -12,46 +15,17 @@ interface ClickAndCollectResponseData {
   ordertype: string;
 }
 
-export interface IOrder {
-  orderstate: string;
-  ordertype: string;
-  orderdata: string;
-  total_price: number;
-  currency: "DKK";
-  id: string;
-  customer: ICustomer;
-}
-
-export interface ICustomer {
-  id: number;
-  name: string;
-  email: string;
-  address: string;
-  zipcode: 9600;
-  city: string;
-  country: string;
-  phone: string;
-}
-
 export const ClickAndCollect: FunctionComponent = () => {
   const navigate = useNavigate();
 
-  const createClickAndCollect = (res: IOrder) => {
+  const createClickAndCollect = (order: IOrderNoCustomer, customer: ICustomer) => {
     axios
       .post<ClickAndCollectResponseData>("http://localhost:8000/create-click-and-collect", {
         cnc_order: {
           orderstate: "picked-up",
         },
-        order: {
-          id: res.id,
-          orderdata: res.orderdata,
-          orderstate: res.orderstate,
-          ordertype: res.ordertype,
-          customer_id: res.customer.id,
-          currecy: res.currency,
-          total_price: res.total_price,
-        },
-        customer: res.customer,
+        order: order,
+        customer: customer,
       })
       .then((res) => {
         if (res.data) {
@@ -61,7 +35,6 @@ export const ClickAndCollect: FunctionComponent = () => {
         }
       })
       .catch((error: AxiosError) => {
-        console.log(error.response);
         alert(error.response?.data);
         console.log(error, "error");
       });
@@ -72,7 +45,8 @@ export const ClickAndCollect: FunctionComponent = () => {
       .get<IOrder>(`${axios.defaults.baseURL}/order/${id}`)
       .then((res) => {
         if (res.data.ordertype === "click-and-collect") {
-          createClickAndCollect(res.data);
+          const { customer, ...order } = res.data;
+          createClickAndCollect(order, customer);
         } else {
           alert("Order er ikke en click and collect ordre");
         }

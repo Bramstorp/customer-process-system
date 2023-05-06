@@ -3,7 +3,7 @@ import React, { useState, createContext, useEffect, PropsWithChildren } from "re
 
 import { fetchToken } from "../../auth/Auth";
 
-import { ICase, ICompany, ICompanyContext } from "../../configuration/types/cases.type";
+import { ICase, ICompany, ICompanyContext } from "../../types/cases.type";
 
 export const CompanyContext = createContext<ICompanyContext>({} as ICompanyContext);
 

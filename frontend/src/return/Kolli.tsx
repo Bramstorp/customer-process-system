@@ -12,16 +12,7 @@ export const Kolli: FunctionComponent = () => {
       axios
         .post(`http://localhost:8000/create-return-case`, {
           retrurn: { kolli_amount: kolli },
-          order: {
-            id: location.state.id,
-            orderdata: location.state.orderdata,
-            orderstatus: location.state.orderstatus,
-            ordertype: location.state.ordertype,
-            customer_id: location.state.customer.id,
-            currecy: location.state.currency,
-            price_amount: location.state.price_amount,
-          },
-          customer: location.state.customer,
+          ...location.state,
         })
         .then((res) => {
           if (res.data) {
@@ -31,6 +22,7 @@ export const Kolli: FunctionComponent = () => {
           }
         })
         .catch((error) => {
+          console.log(error.response.data);
           alert(error.response.data || "Der skete en fejl, prøv igen");
           console.log(error, "error");
         });

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from "react";
 import { CompanyContext } from "../service/company/company.context";
 
-import { ICase } from "./types/cases.type";
+import { ICase } from "../types/cases.type";
 
 export const Configuration: FunctionComponent = () => {
   const { cases } = useContext(CompanyContext);
