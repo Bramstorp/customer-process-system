@@ -50,10 +50,9 @@ def get_customer(customer_id: int):
 
     return customer
 
-
 @customer_routes.get(
-    "/customer", tags=["customers"], status_code=201, description="Get customers"
+    "/customers", tags=["customers"], status_code=201, description="Get customers"
 )
-def get_customer():
+def get_customers():
     customer = session.exec(select(Customers)).all()
     return customer

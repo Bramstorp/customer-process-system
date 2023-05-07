@@ -17,7 +17,6 @@ def demo():
 )
 def demo_order(order_id):
     orderstate = random.choice(["ordered", "processing", "shipped", "delivered"])
-    ordertype = "".join(random.choices(string.ascii_lowercase, k=random.randint(5, 10)))
     orderdata = datetime.now().isoformat()
 
     customer_id = random.randint(1, 1000)
@@ -65,6 +64,91 @@ def demo_order(order_id):
     }
     return order
 
+@demo_routes.get(
+    "/api/test/customer", tags=["demo"], status_code=201, description="demo api"
+)
+def demo_order():
+    customer_id = random.randint(1, 1000)
+    customer_name = "".join(
+        random.choices(string.ascii_uppercase, k=random.randint(5, 15))
+    )
+    customer_email = (
+        "".join(random.choices(string.ascii_lowercase, k=random.randint(5, 10)))
+        + "@"
+        + "".join(random.choices(string.ascii_lowercase, k=random.randint(5, 10)))
+        + ".com"
+    )
+    customer_address = "".join(
+        random.choices(
+            string.ascii_uppercase + string.ascii_lowercase, k=random.randint(10, 20)
+        )
+    )
+    customer_zipcode = random.randint(1000, 9999)
+    customer_city = "".join(
+        random.choices(string.ascii_uppercase, k=random.randint(5, 10))
+    )
+    customer_country = "".join(
+        random.choices(string.ascii_uppercase, k=random.randint(5, 10))
+    )
+    customer_phone = "".join(random.choices(string.digits, k=8))
+
+    customer = {
+        "id": customer_id,
+        "name": customer_name,
+        "email": customer_email,
+        "address": customer_address,
+        "zipcode": customer_zipcode,
+        "city": customer_city,
+        "country": customer_country,
+        "phone": customer_phone,
+    }
+    return customer
+
+
+@demo_routes.get(
+    "/api/test/customers", tags=["demo"], status_code=201, description="demo api"
+)
+def demo_customers():
+    customers_list = []
+    for i in range(10):
+        customer_id = random.randint(1, 1000)
+        customer_name = "".join(
+            random.choices(string.ascii_uppercase, k=random.randint(5, 15))
+        )
+        customer_email = (
+            "".join(random.choices(string.ascii_lowercase, k=random.randint(5, 10)))
+            + "@"
+            + "".join(random.choices(string.ascii_lowercase, k=random.randint(5, 10)))
+            + ".com"
+        )
+        customer_address = "".join(
+            random.choices(
+                string.ascii_uppercase + string.ascii_lowercase, k=random.randint(10, 20)
+            )
+        )
+        customer_zipcode = random.randint(1000, 9999)
+        customer_city = "".join(
+            random.choices(string.ascii_uppercase, k=random.randint(5, 10))
+        )
+        customer_country = "".join(
+            random.choices(string.ascii_uppercase, k=random.randint(5, 10))
+        )
+        customer_phone = "".join(random.choices(string.digits, k=8))
+
+        customer = {
+            "id": customer_id,
+            "name": customer_name,
+            "email": customer_email,
+            "address": customer_address,
+            "zipcode": customer_zipcode,
+            "city": customer_city,
+            "country": customer_country,
+            "phone": customer_phone,
+        }
+        
+        customers_list.append(customer)  # Tilføj kunden til listen
+    
+    return customers_list  # Returner listen af kunder
 
 @demo_routes.get(
     "/api/test/order", tags=["demo"], status_code=201, description="demo api"
