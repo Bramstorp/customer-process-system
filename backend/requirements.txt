@@ -14,3 +14,4 @@ pydantic[email]==1.10.7
 zebra==0.1.0
 python-dotenv==1.0.0
 black==23.3.0
+geopy==2.3.0

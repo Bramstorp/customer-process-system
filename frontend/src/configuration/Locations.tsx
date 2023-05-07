@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
 
 interface Location {
@@ -15,6 +15,8 @@ const initialLocations: Location[] = [
 
 export const Locations: FunctionComponent = () => {
   const [locations, setLocations] = useState(initialLocations);
+
+  useEffect(() => {}, []);
 
   return (
     <>
