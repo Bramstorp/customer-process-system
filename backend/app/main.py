@@ -30,11 +30,14 @@ app.include_router(cnc_routes)
 
 # only for demo purposes
 from app.endpoints.demo_endpoints import demo_routes
+
 app.include_router(demo_routes)
+
 
 @app.get("/health")
 async def is_alive():
     return "ok"
+
 
 @app.on_event("startup")
 def on_startup():

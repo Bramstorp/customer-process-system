@@ -13,45 +13,78 @@ from app.utils.email import send_email
 return_case_router = APIRouter()
 
 
-@return_case_router.post('/create-return-case', tags=['return case'], status_code=201, description='New return case')
+@return_case_router.post(
+    "/create-return-case",
+    tags=["return case"],
+    status_code=201,
+    description="New return case",
+)
 def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers):
-    statement = select(Returns).where(Returns.order_id ==  order.id)
+    statement = select(Returns).where(Returns.order_id == order.id)
     existing_returncase = session.exec(statement).first()
     if existing_returncase:
-        return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='Return case already exists')
+        return JSONResponse(
+            status_code=HTTP_401_UNAUTHORIZED, content="Return case already exists"
+        )
 
     existing_order = session.get(Orders, order.id)
     if existing_order:
         order = existing_order
-    
+
     db_return_case = Returns(**retrurn.dict(), order=order, customer=customer)
     session.add(db_return_case)
     session.commit()
     session.refresh(db_return_case)
 
     if db_return_case and order and customer:
-        send_email(source="returvare", orderid=order.id, company_name="test", customer=customer)
+        send_email(
+            source="returvare", orderid=order.id, company_name="test", customer=customer
+        )
 
     return db_return_case
 
-@return_case_router.get('/return-case/{return_id}', response_model=ReturnCaseWithRelationship, tags=['return case'], status_code=201, description='Get return case')
+
+@return_case_router.get(
+    "/return-case/{return_id}",
+    response_model=ReturnCaseWithRelationship,
+    tags=["return case"],
+    status_code=201,
+    description="Get return case",
+)
 def get_return_case(return_id: int):
     return_case = session.get(Returns, return_id)
     if not return_case:
-        return JSONResponse(status_code=HTTP_404_NOT_FOUND, content='Return case not found')
-    
+        return JSONResponse(
+            status_code=HTTP_404_NOT_FOUND, content="Return case not found"
+        )
+
     return return_case
 
-@return_case_router.get('/return-case/order/{order_id}', response_model=ReturnCaseWithRelationship, tags=['return case'], status_code=201, description='Get return case')
+
+@return_case_router.get(
+    "/return-case/order/{order_id}",
+    response_model=ReturnCaseWithRelationship,
+    tags=["return case"],
+    status_code=201,
+    description="Get return case",
+)
 def get_return_case_by_orderid(order_id: int):
     statement = select(Returns).where(Returns.order_id == order_id)
     existing_returncase = session.exec(statement).first()
     if not existing_returncase:
-        return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content='No return case for by order id')
-    
+        return JSONResponse(
+            status_code=HTTP_401_UNAUTHORIZED, content="No return case for by order id"
+        )
+
     return existing_returncase
 
-@return_case_router.get('/return-cases', tags=['return case'], status_code=201, description='Get all return cases')
+
+@return_case_router.get(
+    "/return-cases",
+    tags=["return case"],
+    status_code=201,
+    description="Get all return cases",
+)
 def get_return_cases():
     return_case = session.exec(select(Returns)).all()
     return return_case

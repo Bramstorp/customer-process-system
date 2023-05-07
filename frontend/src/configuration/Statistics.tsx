@@ -2,14 +2,15 @@ import React, { FunctionComponent, useContext, useState } from "react";
 import { CompanyContext } from "../service/company/company.context";
 
 import { ICase } from "../types/cases.type";
+import { IOrder } from "../types/order.type";
 
 export const Statistics: FunctionComponent = () => {
   const { cases } = useContext(CompanyContext);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [caseType, setCaseType] = useState("all");
+  const [startDate, setStartDate] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+  const [caseType, setCaseType] = useState<string>("all");
 
-  function formatDate(dateString: Date) {
+  function formatDate(dateString: string) {
     const date = new Date(dateString);
     return date.toLocaleDateString("da-DK", {
       year: "numeric",
@@ -21,12 +22,12 @@ export const Statistics: FunctionComponent = () => {
     });
   }
 
-  const TYPE_MAP = {
+  const TYPE_MAP: { [key: string]: string } = {
     cnc: "Click and Collect",
     returns: "Return",
   };
 
-  function filterCases(caseData: ICase) {
+  function filterCases(caseData: ICase): boolean {
     const caseDate = new Date(caseData.date_of_action);
     const filterStartDate = new Date(startDate);
     const filterEndDate = new Date(endDate);
@@ -108,9 +109,6 @@ export const Statistics: FunctionComponent = () => {
             <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
               Order id
             </th>
-            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-              Status
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -135,21 +133,6 @@ export const Statistics: FunctionComponent = () => {
               </td>
               <td className="px-5 py-5 border-b border-gray-200 text-sm">
                 <p className="text-gray-900 whitespace-no-wrap">{caseData.order_id}</p>
-              </td>
-              <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                <span
-                  className={`relative inline-block px-3 py-1 font-semibold ${
-                    caseData.status === "active" ? "text-green-900" : "text-red-900"
-                  } leading-tight`}
-                >
-                  <span
-                    aria-hidden
-                    className={`absolute inset-0 ${
-                      caseData.status === "active" ? "bg-green-200" : "bg-red-200"
-                    } opacity-50 rounded-full`}
-                  ></span>
-                  <span className="relative">{caseData.status === "active" ? "Active" : "Inactive"}</span>
-                </span>
               </td>
             </tr>
           ))}

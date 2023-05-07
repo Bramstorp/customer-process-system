@@ -8,7 +8,7 @@ import { IOrder } from "../types/order.type";
 export const Return: FunctionComponent = () => {
   const navigate = useNavigate();
 
-  const getOrder = (id: string) => {
+  const getOrder = (id: number) => {
     axios
       .get<IOrder>(`${axios.defaults.baseURL}/order/${id}`)
       .then((res) => {
@@ -26,7 +26,7 @@ export const Return: FunctionComponent = () => {
     <div className="pt-4 flex flex-col items-center justify-center">
       <h1 className="text-3xl mt-10">Retur</h1>
       <h1 className="text-2xl mt-10 mb-10">Indsats order-nummer og tryk ENTER</h1>
-      <Numpad placeholder={"Indsæt ordrenummer"} label={"Order-nummer"} onClick={(id) => getOrder(id)} />
+      <Numpad placeholder={"Indsæt ordrenummer"} label={"Order-nummer"} onClick={(id) => getOrder(Number(id))} />
     </div>
   );
 };

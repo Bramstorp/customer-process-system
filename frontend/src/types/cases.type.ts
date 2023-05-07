@@ -1,3 +1,5 @@
+import { IOrder } from "./order.type";
+
 export type ICompany = {
     location: string;
     company_name: string;
@@ -14,6 +16,7 @@ export type ICase = {
     date_of_action: string;
     customer_id: number;
     order_id: number;
+    order: IOrder;
 };
 
 
