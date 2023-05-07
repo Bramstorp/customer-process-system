@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { CompanyContext } from "../service/company/company.context";
 
+import { ICase } from "../types/cases.type";
+
 export const Statistics: FunctionComponent = () => {
   const { cases } = useContext(CompanyContext);
   const [startDate, setStartDate] = useState("");
@@ -24,7 +26,7 @@ export const Statistics: FunctionComponent = () => {
     returns: "Return",
   };
 
-  function filterCases(caseData) {
+  function filterCases(caseData: ICase) {
     const caseDate = new Date(caseData.date_of_action);
     const filterStartDate = new Date(startDate);
     const filterEndDate = new Date(endDate);
@@ -44,7 +46,7 @@ export const Statistics: FunctionComponent = () => {
     return true;
   }
 
-  const filteredCases = cases.filter(filterCases);
+  const filteredCases = cases ? cases.filter(filterCases) : [];
 
   return (
     <div className="flex flex-col">

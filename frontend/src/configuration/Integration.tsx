@@ -1,9 +1,15 @@
 import React, { FunctionComponent, useState, useContext, useEffect } from "react";
 import { CompanyContext } from "../service/company/company.context";
 
+import { ICompany } from "../types/cases.type";
+
+interface Integration extends ICompany {
+  [key: string]: any;
+}
+
 export const Integration: FunctionComponent = () => {
   const { company, createCompany, updateCompany } = useContext(CompanyContext);
-  const [currentCompany, setCurrentCompany] = useState({
+  const [currentCompany, setCurrentCompany] = useState<Integration>({
     location: "",
     company_name: "",
     company_logo: "",

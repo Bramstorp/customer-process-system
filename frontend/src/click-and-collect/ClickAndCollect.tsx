@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
 import axios, { AxiosError } from "axios";
 
-import { IOrderNoCustomer } from "../types/order.type";
+import { IOrderNoCustomer, IOrder } from "../types/order.type";
 import { ICustomer } from "../types/customer.type";
 
 interface ClickAndCollectResponseData {

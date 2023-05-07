@@ -1,7 +1,13 @@
 import React, { FunctionComponent, useState } from "react";
 import { MapContainer, TileLayer, CircleMarker, Popup } from "react-leaflet";
 
-const initialLocations = [
+interface Location {
+  position: [number, number];
+  name: string;
+  count: number;
+}
+
+const initialLocations: Location[] = [
   { position: [56.162939, 10.203921], name: "Aarhus", count: 10 },
   { position: [55.676098, 12.568337], name: "Copenhagen", count: 5 },
   { position: [55.403756, 10.40237], name: "Odense", count: 2 },

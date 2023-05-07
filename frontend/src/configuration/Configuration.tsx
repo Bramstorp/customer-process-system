@@ -28,8 +28,7 @@ export const Configuration: FunctionComponent = () => {
           <p>Click and Collect afhentinger idag</p>
         </div>
         <div className="block w-52 p-6 bg-cyan-100 border border-cyan-200 rounded-lg shadow ">
-          <p className="text-3xl pb-3">{todaysCnc + todaysReturns}</p>
-          <p>Total sager i alt idag.</p>
+          <p className="text-3xl pb-3">{(todaysCnc ?? 0) + (todaysReturns ?? 0)}</p>s <p>Total sager i alt idag.</p>
         </div>
       </div>
     </div>
