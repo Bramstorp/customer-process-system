@@ -20,7 +20,7 @@ def send_email(source, orderid, company_name, customer):
     message["Subject"] = "selvbetjening"
     message["From"] = sender_email
     message["To"] = receiver_email
-    # write the HTML part
+
     html = f"""\
     <html>
     <body>
@@ -30,13 +30,11 @@ def send_email(source, orderid, company_name, customer):
     </html>
     """
 
-    # write the text/plain part
     text = f"""\
     Hi, {customer.name}
     Din {source} er registrete med ordernummer: {orderid}
     """
 
-    # convert both parts to MIMEText objects and add them to the MIMEMultipart message
     part1 = MIMEText(text, "plain")
     part2 = MIMEText(html, "html")
     message.attach(part1)
