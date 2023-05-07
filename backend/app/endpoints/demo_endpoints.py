@@ -131,8 +131,3 @@ def demo_customers():
     }]
     return customer 
 
-@demo_routes.get(
-    "/api/test/order", tags=["demo"], status_code=201, description="demo api"
-)
-def demo_orders():
-    return "order_id"

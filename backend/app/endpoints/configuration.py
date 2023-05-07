@@ -159,7 +159,7 @@ def delete_company(id: int, user=Depends(auth_handler.get_current_user)):
     session.commit()
 
 
-@configuration_router.get("/get-cases", tags=["company"])
+@configuration_router.get("/get-cases", tags=["cases"])
 def get_cases(user=Depends(auth_handler.get_current_user)):
     if not user:
         return JSONResponse(
