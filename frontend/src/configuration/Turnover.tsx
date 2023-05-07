@@ -1,10 +1,20 @@
 import React, { FunctionComponent, useContext } from "react";
 import { CompanyContext } from "../service/company/company.context";
 
+import { ICase } from "../types/cases.type";
+
+interface TotalByType {
+  todayTotal: number;
+  last7DaysTotal: number;
+  thisMonthTotal: number;
+  thisYearTotal: number;
+}
+
 export const Turnover: FunctionComponent = () => {
   const { cases } = useContext(CompanyContext);
 
-  function calculateTotalByType(data, type) {
+  function calculateTotalByType(data: ICase[], type: string): TotalByType {
+    console.log(data);
     const filteredData = data.filter((item) => item.type === type);
 
     const todayTotal = filteredData
@@ -35,7 +45,7 @@ export const Turnover: FunctionComponent = () => {
       })
       .reduce((acc, curr) => acc + curr.order.total_price, 0);
 
-    function isToday(date) {
+    function isToday(date: Date): boolean {
       const today = new Date();
       return (
         date.getDate() === today.getDate() &&
@@ -44,18 +54,18 @@ export const Turnover: FunctionComponent = () => {
       );
     }
 
-    function isLast7Days(date) {
+    function isLast7Days(date: Date): boolean {
       const today = new Date();
       const last7Days = new Date(today.setDate(today.getDate() - 7));
       return date >= last7Days;
     }
 
-    function isThisMonth(date) {
+    function isThisMonth(date: Date): boolean {
       const today = new Date();
       return date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
     }
 
-    function isThisYear(date) {
+    function isThisYear(date: Date): boolean {
       const today = new Date();
       return date.getFullYear() === today.getFullYear();
     }
@@ -68,7 +78,7 @@ export const Turnover: FunctionComponent = () => {
     };
   }
 
-  const data = calculateTotalByType(cases, "cnc");
+  const data = calculateTotalByType(cases ?? [], "cnc");
 
   return (
     <div className="flex flex-col">

@@ -32,12 +32,12 @@ export const fetchToken = () => {
   return token;
 };
 
-export function RequireToken({ children }: RequireTokenProps) {
+export const RequireToken = ({ children }: RequireTokenProps) => {
   let auth = fetchToken();
   let location = useLocation();
 
   if (!auth) {
     return <Navigate to="/admin" state={{ from: location }} />;
   }
-  return children;
-}
+  return <div>{children}</div>;
+};
