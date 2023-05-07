@@ -42,6 +42,7 @@ def create_company(
         return JSONResponse(
             content="UNAUTHORIZED USER", status_code=HTTP_401_UNAUTHORIZED
         )
+        
 
     existing_company = session.exec(
         select(Configuration).where(Configuration.company_user_id == user.id)
@@ -52,7 +53,7 @@ def create_company(
         )
 
     created_config = Configuration(
-        **config.dict(), company_user_id=user.id, company_user=user
+        **config.dict(), company_user=user
     )
     session.add(created_config)
     session.commit()

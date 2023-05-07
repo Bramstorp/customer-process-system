@@ -9,7 +9,7 @@ export const CompanyContext = createContext<ICompanyContext>({} as ICompanyConte
 
 export const CompanyContextProvider = (props: PropsWithChildren) => {
   const [company, setCompany] = useState<ICompany>({} as ICompany);
-  const [cases, setCases] = useState<ICase[] | null>(null);
+  const [cases, setCases] = useState<ICase[] | []>([]);
 
   axios.defaults.baseURL = "http://localhost:8000";
   if (company && company.enable_api_integration) {

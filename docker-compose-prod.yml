@@ -36,6 +36,6 @@ services:
     environment:
       - POSTGRES_USER=customer_process_system_prod
       - POSTGRES_PASSWORD=mysecretpassword
-      - POSTGRES_DB=customer_process_system_db
+      - POSTGRES_DB=customer_process_system_db_prod
 volumes:
   postgres_data:

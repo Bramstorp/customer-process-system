@@ -19,8 +19,18 @@ export const Integration: FunctionComponent = () => {
     enable_api_integration: false,
   });
 
+  const NAME_MAP: { [key: string]: string } = {
+    location: "Location",
+    company_name: "Company name",
+    company_logo: "Company logo",
+    api_endpoint: "API endpoint",
+    api_token: "API token",
+    zebra_printer_ip: "Zebra printer IP",
+    enable_api_integration: "Enable API integration",
+  };
+
   useEffect(() => {
-    if (company) {
+    if (Object.keys(company).length !== 0) {
       setCurrentCompany((prev) => ({
         ...prev,
         ...company,
@@ -29,10 +39,10 @@ export const Integration: FunctionComponent = () => {
   }, [company]);
 
   const handleSubmit = () => {
-    if (company) {
-      updateCompany(currentCompany);
-    } else {
+    if (Object.keys(company).length == 0) {
       createCompany(currentCompany);
+    } else {
+      updateCompany(currentCompany);
     }
   };
 
@@ -44,7 +54,7 @@ export const Integration: FunctionComponent = () => {
           {Object.keys(currentCompany).map((key) => (
             <div key={key} className="flex flex-col mb-4">
               <label className="text-xl mb-2" htmlFor={key}>
-                {key}
+                {NAME_MAP[key]}
               </label>
               {typeof currentCompany[key] === "boolean" ? (
                 <input
@@ -80,7 +90,7 @@ export const Integration: FunctionComponent = () => {
             </div>
           ))}
           <button className="bg-blue-500 text-white p-2 rounded-lg" type="submit">
-            {company ? "Opdater" : "Opret"}
+            {Object.keys(company).length == 0 ? "Create" : "Update"}
           </button>
         </form>
       </div>

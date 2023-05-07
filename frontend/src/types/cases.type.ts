@@ -21,8 +21,8 @@ export type ICase = {
 
 
 export interface ICompanyContext {
-    company: ICompany | null;
-    cases: ICase[] | null;
+    company: ICompany | [];
+    cases: ICase[] | [];
     updateCompany: (company: ICompany) => void;
     createCompany: (company: ICompany) => void;
 };

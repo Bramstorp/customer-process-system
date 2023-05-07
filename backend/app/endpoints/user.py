@@ -24,7 +24,7 @@ def signup(user: UserInput):
     session.add(created_user)
     session.commit()
 
-    return JSONResponse(content="user created", status_code=HTTP_201_CREATED)
+    return users
 
 
 @user_router.post("/login", tags=["users"])
