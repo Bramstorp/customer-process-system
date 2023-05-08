@@ -44,4 +44,4 @@ def login(user: UserLogin):
 
 @user_router.get("/users/me", tags=["users"])
 def get_current_user(user: Users = Depends(auth_handler.get_current_user)):
-    return user
+    return "ok"

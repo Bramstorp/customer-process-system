@@ -9,6 +9,7 @@ from app.models.orders import Orders
 from app.models.customer import Customers
 
 from app.utils.email import send_email
+from app.utils.zgl import print_label
 
 return_case_router = APIRouter()
 
@@ -40,6 +41,7 @@ def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers
         send_email(
             source="returvare", orderid=order.id, company_name="test", customer=customer
         )
+        print_label(ip_address="", kode=order.id)
 
     return db_return_case
 

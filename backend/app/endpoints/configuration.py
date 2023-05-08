@@ -212,5 +212,5 @@ def test_email(company_id: int, customer_id: int):
     "/labels", tags=["Labels"], status_code=201, description="Test label print"
 )
 def test_labelprint(ip_address: str):
-    print_label(ip_address)
+    print_label(ip_address, kode=123)
     return "Printing label"
