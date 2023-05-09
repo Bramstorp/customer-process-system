@@ -18,7 +18,7 @@ const parseJwt = (token: string) => {
   }
 };
 
-const validateToken = async (token: string) => {
+const validateToken = (token: string) => {
   return axios
     .get("http://localhost:8000/users/me", {
       headers: {
@@ -35,7 +35,7 @@ const validateToken = async (token: string) => {
     });
 };
 
-const isValidToken = async (token: string) => {
+const isValidToken = (token: string) => {
   const decodedJwt = parseJwt(token);
   if (!decodedJwt) {
     console.log("invalid decode token");
@@ -46,7 +46,7 @@ const isValidToken = async (token: string) => {
     console.log("invalid token");
     return false;
   }
-  const isTokenValidOnBackend = await validateToken(token);
+  const isTokenValidOnBackend = validateToken(token);
   if (!isTokenValidOnBackend) {
     console.log("invalid token on backend");
     return false;

@@ -30,7 +30,7 @@ export const Numpad: FunctionComponent<Props> = ({ onClick, placeholder, label }
     });
   };
 
-  const enterClick = async () => {
+  const enterClick = () => {
     if (number.num.length == 0) {
       alert("Værdi mangler");
       return;
