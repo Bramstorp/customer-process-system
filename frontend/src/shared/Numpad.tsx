@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 
 const btnLayout = [["7", "8", "9", "SLET"], ["4", "5", "6", "ENTER"], ["1", "2", "3"], ["0"]];
 
@@ -12,6 +12,29 @@ export const Numpad: FunctionComponent<Props> = ({ onClick, placeholder, label }
   let [number, setNumber] = useState({
     num: "",
   });
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const { key } = e;
+      if (key === "Enter") {
+        enterClick();
+      } else if (key === "Backspace") {
+        removeLastClick();
+      } else if (/\d/.test(key)) {
+        setNumber({
+          ...number,
+          num: number.num + key,
+        });
+      }
+    };
+
+    inputRef.current?.addEventListener("keydown", handleKeyDown);
+    return () => {
+      inputRef.current?.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [number]);
 
   const numClick = (e: any) => {
     e.preventDefault();
@@ -47,6 +70,7 @@ export const Numpad: FunctionComponent<Props> = ({ onClick, placeholder, label }
         value={number.num}
         required
         placeholder={placeholder}
+        ref={inputRef}
       />
       <div className="grid grid-cols-4 text-black text-md text-center font-bold leading-6 pt-4 gap-2">
         {btnLayout.flat().map((btn, i) => {

@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from starlette.responses import JSONResponse
 from starlette.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED
 from sqlmodel import select
@@ -7,11 +7,16 @@ from app.db.database import session
 from app.models.rerturn_case import ReturnCreate, Returns, ReturnCaseWithRelationship
 from app.models.orders import Orders
 from app.models.customer import Customers
+from app.models.user import Users
+from app.models.configuration import Configuration
 
 from app.utils.email import send_email
 from app.utils.zgl import print_label
 
+from app.auth.auth import AuthHandler
+
 return_case_router = APIRouter()
+auth_handler = AuthHandler()
 
 
 @return_case_router.post(
@@ -20,7 +25,7 @@ return_case_router = APIRouter()
     status_code=201,
     description="New return case",
 )
-def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers):
+def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers, user: Users = Depends(auth_handler.get_current_user)):
     statement = select(Returns).where(Returns.order_id == order.id)
     existing_returncase = session.exec(statement).first()
     if existing_returncase:
@@ -36,12 +41,15 @@ def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers
     session.add(db_return_case)
     session.commit()
     session.refresh(db_return_case)
+    
+    found_company = select(Configuration).where(Configuration.company_user_id == user.id)
+    existing_config = session.exec(found_company).first()
 
-    if db_return_case and order and customer:
+    if db_return_case and order and customer and existing_config:
         send_email(
             source="returvare", orderid=order.id, company_name="test", customer=customer
         )
-        print_label(ip_address="", kode=order.id)
+        print_label(ip_address=existing_config.zebra_printer_ip, data=order.id)
 
     return db_return_case
 
