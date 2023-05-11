@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 import { CompanyContext } from "../service/company/company.context";
 import { ICase } from "../types/cases.type";
+import { Graph } from "./Graph";
 
 interface TotalByType {
   todayTotal: number;
@@ -74,13 +75,13 @@ export const CustomerCases: FunctionComponent = () => {
   }
 
   function getCasesByHour(data: ICase[]): CasesByHour[] {
-    const casesByHour: CasesByHour[] = new Array(7).fill(0).map((_, i) => ({ hour: i + 9, count: 0 }));
+    const casesByHour: CasesByHour[] = new Array(8).fill(0).map((_, i) => ({ hour: i + 9, count: 0 }));
 
     data.forEach((item) => {
       const date = new Date(item.date_of_action);
       const hour = date.getHours();
 
-      if (hour >= 9 && hour <= 15) {
+      if (hour >= 9 && hour <= 16) {
         casesByHour[hour - 9].count++;
       }
     });
@@ -91,8 +92,6 @@ export const CustomerCases: FunctionComponent = () => {
   const casesByHour = getCasesByHour(cases ?? []);
 
   const data = calculateCustomersByInterval(cases ?? []);
-
-  console.log(casesByHour);
 
   return (
     <div className="flex flex-col">
@@ -140,6 +139,7 @@ export const CustomerCases: FunctionComponent = () => {
         </tbody>
       </table>
       <br />
+      <Graph data={casesByHour} />
     </div>
   );
 };

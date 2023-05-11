@@ -1,14 +1,16 @@
 from typing import Optional
 from sqlmodel import Field, SQLModel, Relationship
-import datetime
-from typing import List
+from datetime import datetime
+import pytz
 
 from app.models.customer import Customers
 from app.models.orders import Orders
 
+tz = pytz.timezone('Europe/Copenhagen')
+
 
 class ReturnBase(SQLModel):
-    return_date: datetime.datetime = datetime.datetime.now()
+    return_date: datetime = datetime.now(tz)
     kolli_amount: int
 
 

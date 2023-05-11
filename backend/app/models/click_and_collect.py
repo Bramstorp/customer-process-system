@@ -1,13 +1,16 @@
 from typing import Optional
 from sqlmodel import Field, SQLModel, Relationship
-import datetime
+from datetime import datetime
+import pytz
 
 from app.models.customer import Customers
 from app.models.orders import Orders
 
+tz = pytz.timezone('Europe/Copenhagen')
+
 
 class ClickAndCollectBase(SQLModel):
-    pickup_date: datetime.datetime = datetime.datetime.now()
+    pickup_date: datetime = datetime.now(tz)
     orderstate: Optional[str] = Field(default="")
 
 
