@@ -2,7 +2,7 @@ import zebra
 import qrcode
 import socket
 
-def print_label(ip_address, data="", kolli=""):
+def print_label(ip_address, data="", kolli="", total=""):
     ip = '192.168.87.197'
     port = 9100
 
@@ -21,7 +21,7 @@ def print_label(ip_address, data="", kolli=""):
     ^FO140,60
     ^A0,40,40
     ^FD
-    kolli: {kolli}
+    kolli: {kolli}/{total}
     ^FS
 
     ^XZ
