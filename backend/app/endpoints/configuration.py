@@ -160,12 +160,7 @@ def delete_company(id: int, user=Depends(auth_handler.get_current_user)):
 
 
 @configuration_router.get("/get-cases", tags=["cases"])
-def get_cases(user=Depends(auth_handler.get_current_user)):
-    if not user:
-        return JSONResponse(
-            content="UNAUTHORIZED USER", status_code=HTTP_401_UNAUTHORIZED
-        )
-
+def get_cases():
     cnc = session.exec(
         select(ClickAndCollects, Orders).where(ClickAndCollects.order_id == Orders.id)
     ).all()

@@ -36,7 +36,10 @@ def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers
     existing_order = session.get(Orders, order.id)
     if existing_order:
         order = existing_order
-
+    else:
+        order = Orders(**order.dict(), customer=customer)
+        session.add(order)
+        
     db_return_case = Returns(**retrurn.dict(), order=order, customer=customer)
     session.add(db_return_case)
     session.commit()

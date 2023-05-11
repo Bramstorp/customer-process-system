@@ -36,6 +36,9 @@ def create_cnc_order(
     existing_order = session.get(Orders, order.id)
     if existing_order:
         order = existing_order
+    else:
+        order = Orders(**order.dict(), customer=customer)
+        session.add(order)
 
     db_cnc_order = ClickAndCollects(**cnc_order.dict(), order=order, customer=customer)
     session.add(db_cnc_order)

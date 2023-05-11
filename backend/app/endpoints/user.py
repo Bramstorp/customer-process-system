@@ -24,7 +24,7 @@ def signup(user: UserInput):
     session.add(created_user)
     session.commit()
 
-    return created_user
+    return user
 
 
 @user_router.post("/login", tags=["users"])
