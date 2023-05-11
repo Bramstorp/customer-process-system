@@ -25,7 +25,7 @@ auth_handler = AuthHandler()
     status_code=201,
     description="New return case",
 )
-def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers, user: Users = Depends(auth_handler.get_current_user)):
+def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers):
     statement = select(Returns).where(Returns.order_id == order.id)
     existing_returncase = session.exec(statement).first()
     if existing_returncase:
@@ -42,14 +42,11 @@ def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers
     session.commit()
     session.refresh(db_return_case)
     
-    found_company = select(Configuration).where(Configuration.company_user_id == user.id)
-    existing_config = session.exec(found_company).first()
-
-    if db_return_case and order and customer and existing_config:
+    if db_return_case and order and customer:
         send_email(
             source="returvare", orderid=order.id, company_name="test", customer=customer
         )
-        print_label(ip_address=existing_config.zebra_printer_ip, data=order.id)
+        print_label(ip_address="", data=order.id)
 
     return db_return_case
 

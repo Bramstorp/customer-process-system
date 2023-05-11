@@ -1,5 +1,6 @@
 from typing import Optional
 from sqlmodel import Field, SQLModel
+import datetime
 
 
 class CustomerBase(SQLModel):
@@ -10,6 +11,7 @@ class CustomerBase(SQLModel):
     city: str
     country: str
     phone: str
+    created: datetime.datetime = datetime.datetime.now()
 
 
 class Customers(CustomerBase, table=True):

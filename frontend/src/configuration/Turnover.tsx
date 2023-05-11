@@ -14,7 +14,6 @@ export const Turnover: FunctionComponent = () => {
   const { cases } = useContext(CompanyContext);
 
   function calculateTotalByType(data: ICase[], type: string): TotalByType {
-    console.log(data);
     const filteredData = data.filter((item) => item.type === type);
 
     const todayTotal = filteredData
