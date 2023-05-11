@@ -65,14 +65,14 @@ def get_customers():
 def get_customers_info():
     all_customer = session.exec(select(Customers)).all()
     geolocator = Nominatim(user_agent="customer_info")
-    
+            
     customer_info_list = [
         {
             "id": customer.id,
             "name": customer.name,
             "address": customer.address,
-            "latitude": geolocator.geocode(customer.address).latitude,
-            "longitude": geolocator.geocode(customer.address).longitude,
+            "latitude": geolocator.geocode(customer.address).latitude if geolocator.geocode(customer.address) else "",
+            "longitude": geolocator.geocode(customer.address).longitude if geolocator.geocode(customer.address) else "",
             "phone": customer.phone,
         }   
         for customer in all_customer

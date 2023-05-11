@@ -11,17 +11,20 @@ interface Location {
 
 export const Locations: FunctionComponent = () => {
   const [locations, setLocations] = useState<Location[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setLoading(true);
     axios.get<Location[]>("http://localhost:8000/customers-locations").then((res) => {
       setLocations(res.data);
+      setLoading(false);
     });
   }, []);
 
   return (
     <>
       <h1 className="text-5xl mb-12">locations</h1>
-      {locations ? (
+      {!loading ? (
         <MapContainer center={[56.162939, 10.203921]} zoom={7} style={{ height: "500px" }}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {locations.map((location, index) => (
@@ -44,7 +47,7 @@ export const Locations: FunctionComponent = () => {
           ))}
         </MapContainer>
       ) : (
-        <div>"Loading..."</div>
+        <div>Loading...</div>
       )}
     </>
   );
