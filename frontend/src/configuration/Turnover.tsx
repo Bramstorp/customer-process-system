@@ -18,28 +18,28 @@ export const Turnover: FunctionComponent = () => {
 
     const todayTotal = filteredData
       .filter((item) => {
-        const date = new Date(item.order.orderdata);
+        const date = new Date(item.date_of_action);
         return isToday(date);
       })
       .reduce((acc, curr) => acc + curr.order.total_price, 0);
 
     const last7DaysTotal = filteredData
       .filter((item) => {
-        const date = new Date(item.order.orderdata);
+        const date = new Date(item.date_of_action);
         return isLast7Days(date);
       })
       .reduce((acc, curr) => acc + curr.order.total_price, 0);
 
     const thisMonthTotal = filteredData
       .filter((item) => {
-        const date = new Date(item.order.orderdata);
+        const date = new Date(item.date_of_action);
         return isThisMonth(date);
       })
       .reduce((acc, curr) => acc + curr.order.total_price, 0);
 
     const thisYearTotal = filteredData
       .filter((item) => {
-        const date = new Date(item.order.orderdata);
+        const date = new Date(item.date_of_action);
         return isThisYear(date);
       })
       .reduce((acc, curr) => acc + curr.order.total_price, 0);
