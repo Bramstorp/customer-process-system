@@ -139,7 +139,13 @@ export const CustomerCases: FunctionComponent = () => {
         </tbody>
       </table>
       <br />
-      <Graph data={casesByHour} />
+      {casesByHour ? (
+        <Graph data={casesByHour} />
+      ) : (
+        <div className="flex justify-center">
+          <p className="text-2xl">No data</p>
+        </div>
+      )}
     </div>
   );
 };

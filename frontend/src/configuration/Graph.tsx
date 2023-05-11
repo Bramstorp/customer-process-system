@@ -13,8 +13,7 @@ export const Graph: FunctionComponent<IProps> = ({ data }) => {
   const maxCount = Math.max(...data.map((item) => item.count));
   const minCount = Math.min(...data.map((item) => item.count));
 
-  const yTicks = [maxCount, Math.round((maxCount + minCount) / 2), minCount];
-
+  const yTicks = [maxCount, Math.ceil((maxCount + minCount) / 2), Math.floor((maxCount + minCount) / 2), minCount];
   return (
     <div className="rounded-lg border border-gray-200 p-8">
       <h4 className="mb-4">Graph customers visit by hour</h4>
