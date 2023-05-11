@@ -167,6 +167,7 @@ def get_cases():
     returns = session.exec(
         select(Returns, Orders).where(Returns.order_id == Orders.id)
     ).all()
+
     cnc_flat_map = [
         {
             "type": "cnc",

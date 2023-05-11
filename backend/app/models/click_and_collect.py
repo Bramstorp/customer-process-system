@@ -10,7 +10,7 @@ tz = pytz.timezone('Europe/Copenhagen')
 
 
 class ClickAndCollectBase(SQLModel):
-    pickup_date: datetime = datetime.now(tz)
+    pickup_date: datetime = Field(default_factory=lambda: datetime.now(tz))
     orderstate: Optional[str] = Field(default="")
 
 

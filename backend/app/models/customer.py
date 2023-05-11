@@ -14,7 +14,7 @@ class CustomerBase(SQLModel):
     city: str
     country: str
     phone: str
-    created: datetime = datetime.now(tz)
+    created: datetime = Field(default_factory=lambda: datetime.now(tz))
 
 
 class Customers(CustomerBase, table=True):

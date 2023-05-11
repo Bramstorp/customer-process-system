@@ -10,7 +10,7 @@ tz = pytz.timezone('Europe/Copenhagen')
 
 
 class ReturnBase(SQLModel):
-    return_date: datetime = datetime.now(tz)
+    return_date: datetime = Field(default_factory=lambda: datetime.now(tz))
     kolli_amount: int
 
 
