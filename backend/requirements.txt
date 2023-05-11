@@ -17,3 +17,5 @@ black==23.3.0
 geopy==2.3.0
 qrcode==7.4.2
 pytz==2023.3
+code128==0.3
+python-barcode==0.14.0

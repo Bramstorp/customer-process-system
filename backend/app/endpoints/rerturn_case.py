@@ -49,7 +49,8 @@ def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers
         send_email(
             source="returvare", orderid=order.id, company_name="test", customer=customer
         )
-        print_label(ip_address="", data=order.id)
+        for x in range(1, retrurn.kolli_amount + 1):
+            print_label(ip_address="", data=order.id, kolli=x)
 
     return db_return_case
 
