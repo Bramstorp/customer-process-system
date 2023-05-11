@@ -16,6 +16,10 @@ export const Numpad: FunctionComponent<Props> = ({ onClick, placeholder, label }
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const { key } = e;
       if (key === "Enter") {
