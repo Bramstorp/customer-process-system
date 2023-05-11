@@ -208,5 +208,7 @@ def test_email(company_id: int, customer_id: int):
     "/labels", tags=["Labels"], status_code=201, description="Test label print"
 )
 def test_labelprint(ip_address: str):
-    print_label(ip_address, data=123)
-    return "Printing label"
+    total_kolli = 2
+    for x in range(1, total_kolli + 1):
+        print_label(ip_address="", data=123, kolli=x, total=total_kolli)
+    return "Label printed"
