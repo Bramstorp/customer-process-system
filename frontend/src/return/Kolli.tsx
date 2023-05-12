@@ -2,18 +2,27 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Numpad } from "../shared/Numpad";
 import axios from "axios";
+import { fetchToken } from "../auth/Auth";
 
 export const Kolli: FunctionComponent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const config = {
+    headers: { Authorization: `Bearer ${fetchToken()}` },
+  };
+
   const createReturnCase = (kolli: string | number | null | undefined) => {
     if (typeof kolli === "string") {
       axios
-        .post(`http://localhost:8000/create-return-case`, {
-          retrurn: { kolli_amount: kolli },
-          ...location.state,
-        })
+        .post(
+          `http://localhost:8000/create-return-case`,
+          {
+            retrurn: { kolli_amount: kolli },
+            ...location.state,
+          },
+          config
+        )
         .then((res) => {
           if (res.data) {
             navigate("/return/confirm", {

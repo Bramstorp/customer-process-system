@@ -25,7 +25,7 @@ auth_handler = AuthHandler()
     status_code=201,
     description="New return case",
 )
-def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers):
+def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers, user=Depends(auth_handler.get_current_user)):
     statement = select(Returns).where(Returns.order_id == order.id)
     existing_returncase = session.exec(statement).first()
     if existing_returncase:
@@ -40,18 +40,20 @@ def create_return_case(retrurn: ReturnCreate, order: Orders, customer: Customers
         order = Orders(**order.dict(), customer=customer)
         session.add(order)
         
+    existing_config = session.exec(select(Configuration).where(Configuration.company_user_id == user.id)).first()
+        
     db_return_case = Returns(**retrurn.dict(), order=order, customer=customer)
     session.add(db_return_case)
     session.commit()
     session.refresh(db_return_case)
     
-    if db_return_case and order and customer:
+    if db_return_case and order and customer and existing_config:
         send_email(
             source="returvare", orderid=order.id, company_name="test", customer=customer
         )
         total_kolli = retrurn.kolli_amount
         for kolli in range(1, total_kolli + 1):
-            print_label(ip_address="", data=order.id, kolli=kolli, total=total_kolli)
+            print_label(ip_address=existing_config.zebra_printer_ip, data=order.id, kolli=kolli, total=total_kolli)
 
     return db_return_case
 

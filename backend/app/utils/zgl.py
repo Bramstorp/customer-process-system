@@ -3,6 +3,9 @@ import qrcode
 import socket
 
 def print_label(ip_address, data="", kolli="", total=""):
+    if not ip_address:
+        return "No ip address"
+    
     ip = '192.168.87.197'
     port = 9100
 
