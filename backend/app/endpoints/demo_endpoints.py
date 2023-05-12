@@ -47,10 +47,10 @@ def demo_order(order_id):
         "id": customer_id,
         "name": customer_name,
         "email": customer_email,
-        "address": customer_address,
-        "zipcode": customer_zipcode,
-        "city": customer_city,
-        "country": customer_country,
+        "address": "spættevej 35",
+        "zipcode": "8210",
+        "city": "aarhus v",
+        "country": "denmark",
         "phone": customer_phone,
     }
     order = {
