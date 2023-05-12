@@ -38,9 +38,8 @@ export const Locations: FunctionComponent = () => {
               opacity={0.5}
             >
               <Popup>
-                <p>
-                  {location.address}: {location.count}
-                </p>
+                <p>Customer addresss:{location.address}</p>
+                <p>Number of customers: {location.count}</p>
               </Popup>
               <div className="marker-label">{location.count}</div>
             </CircleMarker>
